@@ -1,0 +1,4 @@
+﻿
+Installing-Package MailKit -version 2.1.4.
+
+The namespace is 'MimeKit'

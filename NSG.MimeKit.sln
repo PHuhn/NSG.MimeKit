@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSG.MimeKit.Extensions", "NSG.MimeKit.Extensions\NSG.MimeKit.Extensions.csproj", "{392877C8-C6BE-41EB-8727-7F8B91BCC7CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSG.MimeKit_Tests", "NSG.MimeKit_Tests\NSG.MimeKit_Tests.csproj", "{D57FCE65-E0A6-427B-850B-8043D93D429C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{392877C8-C6BE-41EB-8727-7F8B91BCC7CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{392877C8-C6BE-41EB-8727-7F8B91BCC7CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{392877C8-C6BE-41EB-8727-7F8B91BCC7CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{392877C8-C6BE-41EB-8727-7F8B91BCC7CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D57FCE65-E0A6-427B-850B-8043D93D429C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D57FCE65-E0A6-427B-850B-8043D93D429C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D57FCE65-E0A6-427B-850B-8043D93D429C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D57FCE65-E0A6-427B-850B-8043D93D429C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AB334ED0-81E5-4408-98DA-84A7A90DC693}
+	EndGlobalSection
+EndGlobal
