@@ -10,6 +10,17 @@ namespace NSG.Library_Tests
     public class MimeKit_Extensions_Tests
     {
         //
+        [TestMethod]
+        public void MimeKit_Extensions_NewMimeMessage01_Test()
+        {
+            //
+            MimeMessage _email = Extensions.NewMimeMessage()
+                .From("FromUser1@somewhere.com");
+            Console.WriteLine(_email);
+            Assert.IsNotNull(_email);
+            //
+        }
+        //
         //  static MimeMessage  From(fromAddress)
         //  static MimeMessage  From(fromAddress, name)
         //  static MimeMessage  From( MailboxAddress )
@@ -396,7 +407,7 @@ namespace NSG.Library_Tests
                 .From(_fromAddress).To(_toAddress)
                 .Subject(_subject).Body(
                     Extensions.TextBody(_message)
-                        .Attachment(_buffer, "Text.txt", "text/plain")
+                        .Attachment(_buffer, "Text.txt", "text/plain;charset=utf-8")
                 ).SendAsync(); // "localhost", 25, false, "", "");
             string _actual = _email.Result.TextBody;
             string _expected = _message;

@@ -1,22 +1,60 @@
 ﻿using System;
-using System.IO;
 using MimeKit;
 using MailKit.Net.Smtp;
 using System.Threading.Tasks;
 //
 namespace MimeKit
 {
+    //
+    /// <summary>
+    /// Namespace of MimeKit. MimeKit is an external namespace from the 
+    /// MailKit/MimeKit libraries. This appends to the MimeKit namespace
+    /// and extends the MimeMessage and BodyBuilder classes.
+    /// </summary>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
+    {
+    }
+    //
+    /// <summary>
+    /// Fluent extension methods for MimeMessage and BodyBuilder classes
+    /// in the MimeKit library.
+    /// </summary>
     public static class Extensions
     {
         //
-        //  static MimeMessage  From(mimeMessage, fromAddress)
-        //  static MimeMessage  From(mimeMessage, fromAddress, name)
-        //  static MimeMessage  From(mimeMessage, MailboxAddress)
+        //  MimeMessage NewMimeMessage()
+        //
+        #region "NewMimeMessage"
+        //
+        /// <summary>
+        /// Create a new MimeMessage class to hold an email message.
+        /// <example>
+        /// To invoke NewMimeMessage as follows:
+        /// <code>
+        ///  ...
+        ///  using MimeKit;
+        ///  ...
+        ///      MimeMessage _email = Extensions.NewMimeMessage();
+        /// </code>
+        /// </example>
+        /// </summary>
+        /// <returns>A new MimeMessage to allow fluent design.</returns>
+        public static MimeMessage NewMimeMessage()
+        {
+            return new MimeMessage();
+        }
+        //
+        #endregion // NewMimeMessage
+        //
+        //  MimeMessage From(this mimeMessage, fromAddress)
+        //  MimeMessage From(this mimeMessage, fromAddress, name)
+        //  MimeMessage From(this mimeMessage, MailboxAddress)
         //
         #region "From"
         //
         /// <summary>
-        /// Set the single from address
+        /// Set the from address with a string of a single email address.
         /// </summary>
         /// <param name="mimeMessage">This MimeMessage.</param>
         /// <param name="fromAddress">string of an email address</param>
@@ -26,8 +64,9 @@ namespace MimeKit
             mimeMessage.From.Add(new MailboxAddress(fromAddress));
             return mimeMessage;
         }
+        //
         /// <summary>
-        /// Set the single from email address
+        /// Set the from address with two strings.
         /// </summary>
         /// <param name="mimeMessage">This MimeMessage.</param>
         /// <param name="fromAddress">string of an email address</param>
@@ -40,10 +79,10 @@ namespace MimeKit
         }
         //
         /// <summary>
-        /// Set the single from email address
+        /// Set the from address with an email address structure.
         /// </summary>
         /// <param name="mimeMessage">This MimeMessage.</param>
-        /// <param name="fromAddress">A MailboxAddress, including an email address and the name</param>
+        /// <param name="fromAddress">A MailboxAddress class, including an email address and the name</param>
         /// <returns>this, MimeMessage to allow fluent design.</returns>
         public static MimeMessage From(this MimeMessage mimeMessage, MailboxAddress fromAddress)
         {
@@ -53,14 +92,14 @@ namespace MimeKit
         // 
         #endregion // From
         // 
-        //  MimeMessage To(mimeMessage, fromAddress)
-        //  MimeMessage To(mimeMessage, fromAddress, name)
-        //  MimeMessage To(mimeMessage, MailboxAddress)
+        //  MimeMessage To(this mimeMessage, fromAddress)
+        //  MimeMessage To(this mimeMessage, fromAddress, name)
+        //  MimeMessage To(this mimeMessage, MailboxAddress)
         //
         #region "To"
-        // 
+        //
         /// <summary>
-        /// Add a To email address.
+        /// Set a To address with a string of a single email address.
         /// </summary>
         /// <param name="mimeMessage">This MimeMessage.</param>
         /// <param name="toAddress">an email address</param>
@@ -70,8 +109,9 @@ namespace MimeKit
             mimeMessage.To.Add(new MailboxAddress(toAddress));
             return mimeMessage;
         }
+        //
         /// <summary>
-        /// Add a to email address.
+        /// Set a To address with two strings.
         /// </summary>
         /// <param name="mimeMessage">This MimeMessage.</param>
         /// <param name="toAddress">an email address</param>
@@ -82,11 +122,12 @@ namespace MimeKit
             mimeMessage.To.Add(new MailboxAddress(toAddress, name));
             return mimeMessage;
         }
+        //
         /// <summary>
-        /// Add a to email address.
+        /// Set a To address with an email address structure.
         /// </summary>
         /// <param name="mimeMessage">This MimeMessage.</param>
-        /// <param name="toAddress">A MailboxAddress, including an email address and the name</param>
+        /// <param name="toAddress">A MailboxAddress class, including an email address and the name</param>
         /// <returns>this, MimeMessage to allow fluent design.</returns>
         public static MimeMessage To(this MimeMessage mimeMessage, MailboxAddress toAddress)
         {
@@ -96,14 +137,14 @@ namespace MimeKit
         // 
         #endregion // To
         //
-        //  MimeMessage CC(mimeMessage, fromAddress)
-        //  MimeMessage CC(mimeMessage, fromAddress, name)
-        //  MimeMessage CC(mimeMessage, MailboxAddress)
+        //  MimeMessage CC(this mimeMessage, fromAddress)
+        //  MimeMessage CC(this mimeMessage, fromAddress, name)
+        //  MimeMessage CC(this mimeMessage, MailboxAddress)
         //
         #region "CC"
         //
         /// <summary>
-        /// Add a carbon copy (cc) email address.
+        /// Set a carbon copy (cc) email address with a string of a single email address.
         /// </summary>
         /// <param name="mimeMessage">This MimeMessage.</param>
         /// <param name="ccAddress">an email address</param>
@@ -113,8 +154,9 @@ namespace MimeKit
             mimeMessage.Cc.Add(new MailboxAddress(ccAddress));
             return mimeMessage;
         }
+        //
         /// <summary>
-        /// Add a carbon copy (cc) email address.
+        /// Set a carbon copy (cc) email address with two strings.
         /// </summary>
         /// <param name="mimeMessage">This MimeMessage.</param>
         /// <param name="ccAddress">an email address</param>
@@ -125,11 +167,12 @@ namespace MimeKit
             mimeMessage.Cc.Add(new MailboxAddress(ccAddress, name));
             return mimeMessage;
         }
+        //
         /// <summary>
-        /// Add a carbon copy (cc) email address.
+        /// Set a carbon copy (cc) email address with an email address structure.
         /// </summary>
         /// <param name="mimeMessage">This MimeMessage.</param>
-        /// <param name="ccAddress">A MailboxAddress, including an email address and the name</param>
+        /// <param name="ccAddress">A MailboxAddress class, including an email address and the name</param>
         /// <returns>this, MimeMessage to allow fluent design.</returns>
         public static MimeMessage CC(this MimeMessage mimeMessage, MailboxAddress ccAddress)
         {
@@ -139,14 +182,14 @@ namespace MimeKit
         //
         #endregion // CC
         // 
-        //  MimeMessage BCC(mimeMessage, fromAddress)
-        //  MimeMessage BCC(mimeMessage, fromAddress, name)
-        //  MimeMessage BCC(mimeMessage, MailboxAddress)
+        //  MimeMessage BCC(this mimeMessage, fromAddress)
+        //  MimeMessage BCC(this mimeMessage, fromAddress, name)
+        //  MimeMessage BCC(this mimeMessage, MailboxAddress)
         //
         #region "BCC"
         //
         /// <summary>
-        /// Add a blind carbon copy (bcc) email address.
+        /// Set a blind carbon copy (bcc) email address with a string of a single email address.
         /// </summary>
         /// <param name="mimeMessage">This MimeMessage.</param>
         /// <param name="bccAddress">an email address</param>
@@ -156,8 +199,9 @@ namespace MimeKit
             mimeMessage.Bcc.Add(new MailboxAddress(bccAddress));
             return mimeMessage;
         }
+        //
         /// <summary>
-        /// Add a blind carbon copy (bcc) email address.
+        /// Set a blind carbon copy (bcc) email address with two strings.
         /// </summary>
         /// <param name="mimeMessage">This MimeMessage.</param>
         /// <param name="bccAddress">an email address</param>
@@ -168,11 +212,12 @@ namespace MimeKit
             mimeMessage.Bcc.Add(new MailboxAddress(bccAddress, name));
             return mimeMessage;
         }
+        //
         /// <summary>
-        /// Add a blind carbon copy (bcc) email address.
+        /// Set a blind carbon copy (bcc) email address with an email address structure.
         /// </summary>
         /// <param name="mimeMessage">This MimeMessage.</param>
-        /// <param name="bccAddress">A MailboxAddress, including an email address and the name</param>
+        /// <param name="bccAddress">A MailboxAddress class, including an email address and the name</param>
         /// <returns>this, MimeMessage to allow fluent design.</returns>
         public static MimeMessage BCC(this MimeMessage mimeMessage, MailboxAddress bccAddress)
         {
@@ -182,15 +227,13 @@ namespace MimeKit
         //
         #endregion // BCC
         //
-        //  MimeMessage Subject(mimeMessage, subject)
-        //  MimeMessage Body(mimeMessage, bodyBuilder)
-        //  BodyBuilder HtmlBody(message)
-        //  BodyBuilder TextBody(message)
+        //  MimeMessage Subject(this mimeMessage, subject)
+        //  MimeMessage Body(this mimeMessage, bodyBuilder)
         //
         #region "Subject and Body"
         //
         /// <summary>
-        /// Set the title of email message.
+        /// Set the title of an email message.
         /// </summary>
         /// <param name="mimeMessage">This MimeMessage.</param>
         /// <param name="subject">the subject line</param>
@@ -213,8 +256,32 @@ namespace MimeKit
             return mimeMessage;
         }
         //
+        #endregion // Subject and Body
+        //
+        //  BodyBuilder HtmlBody(message)
+        //  BodyBuilder TextBody(message)
+        //  BodyBuilder Attachment(this bodyBuilder, buffer, displayName, mimeType)
+        //
+        #region "BodyBuilder class"
+        //
         /// <summary>
         /// Set the body of the email message.
+        /// <example>
+        /// To invoke HtmlBody as follows:
+        /// <code>
+        ///  ...
+        ///  using MimeKit;
+        ///  ...
+        ///      BodyBuilder _bodyBuilder = Extensions.HtmlBody("html text");
+        ///  ...
+        /// </code>
+        /// Or a more complete example as follows:
+        /// <code>
+        ///  MimeMessage _email = Extensions.NewMimeMessage()
+        ///      .From(_fromAddress).To(_toAddress)
+        ///      .Subject(_subject).Body(Extensions.TextBody(_message));
+        /// </code>
+        /// </example>
         /// </summary>
         /// <param name="message">HTML Email message body.</param>
         /// <returns>A new BodyBuilder to allow fluent design.</returns>
@@ -229,6 +296,16 @@ namespace MimeKit
         //
         /// <summary>
         /// Set the body of the email message with Html content.
+        /// <example>
+        /// To invoke TextBody as follows:
+        /// <code>
+        ///  ...
+        ///  using MimeKit;
+        ///  ...
+        ///      BodyBuilder _bodyBuilder = Extensions.TextBody("plain text");
+        ///  ...
+        /// </code>
+        /// </example>
         /// </summary>
         /// <param name="message">Text e-mail body</param>
         /// <returns>A new BodyBuilder to allow fluent design.</returns>
@@ -241,11 +318,9 @@ namespace MimeKit
             return body;
         }
         //
-        #endregion // Subject and Body
-        //
         /// <summary>
         /// Add an attachment to the mail message.
-        /// <example> 
+        /// <example>
         /// This sample shows how to call this constructor.
         /// <code>
         ///  using MimeKit;
@@ -260,8 +335,9 @@ namespace MimeKit
         /// </code>
         /// </example>
         /// </summary>
-        /// <param name="buffer">byte buffer containing the attachment</param>
         /// <param name="displayName">name placed on the attachment</param>
+        /// <param name="buffer">byte buffer containing the attachment</param>
+        /// <param name="bodyBuilder">this BodyBuilder</param>
         /// <param name="mimeType">mime type
         /// <example>mime type examples:
         /// <list type="bullet">
@@ -270,14 +346,14 @@ namespace MimeKit
         /// <item><description>multipart/form-data</description></item>
         /// <item><description>text/html</description></item>
         /// <item><description>text/xml</description></item>
-        /// <item><description>text/plain</description></item>
+        /// <item><description>text/plain;charset=utf-8</description></item>
         /// <item><description>image/png</description></item>
         /// <item><description>image/jpeg</description></item>
         /// <item><description>image/gif</description></item>
         /// </list>
         /// </example>
         /// </param>
-        /// <returns>return its self</returns>
+        /// <returns>this, BodyBuilder to allow fluent design.</returns>
         public static BodyBuilder Attachment(this BodyBuilder bodyBuilder, byte[] buffer, string displayName, string mimeType)
         {
             //
@@ -307,8 +383,27 @@ namespace MimeKit
             return bodyBuilder;
         }
         //
+        #endregion // BodyBuilder class
+        //
+        //  MimeMessage Send(this mimeMessage, smtpHost, port, ssl, userName, passWord)
+        //  MimeMessage Send(this mimeMessage, smtpHost, port, ssl)
+        //  MimeMessage Send(this mimeMessage)
+        //  MimeMessage SendAsync(this mimeMessage, smtpHost, port, ssl, userName, passWord)
+        //  MimeMessage SendAsync(this mimeMessage, smtpHost, port, ssl)
+        //  MimeMessage SendAsync(this mimeMessage)
+        //
         #region "Send"
         //
+        /// <summary>
+        /// Synchronously send a (this) MimeMessage via the MailKit's SmtpClient.
+        /// </summary>
+        /// <param name="mimeMessage">This MimeMessage.</param>
+        /// <param name="smtpHost">Host name of the SMTP server or relay.</param>
+        /// <param name="port">An integer port number.</param>
+        /// <param name="ssl">Boolean value for enabling SSL.</param>
+        /// <param name="userName">Connect to the SMTP host with this userName.</param>
+        /// <param name="passWord">Connect to the SMTP host with this user name's password.</param>
+        /// <returns>this, MimeMessage to allow fluent design.</returns>
         public static MimeMessage Send(this MimeMessage mimeMessage, string smtpHost, int port, bool ssl, string userName, string passWord)
         {
             using (SmtpClient _client = new SmtpClient())
@@ -326,15 +421,61 @@ namespace MimeKit
             }
             return mimeMessage;
         }
+        //
+        /// <summary>
+        /// Synchronously send a (this) MimeMessage via the MailKit's SmtpClient.
+        /// <note type="note">
+        /// This will invoke the following method:
+        /// Send(this mimeMessage, smtpHost, port, ssl, userName, passWord)
+        /// The above invocation assumes the following parameters:
+        /// <list type="bullet">
+        /// <item><description>A userName of empty string.</description></item>
+        /// <item><description>A passWord of empty string.</description></item>
+        /// </list>
+        /// </note>
+        /// </summary>
+        /// <param name="mimeMessage">This MimeMessage.</param>
+        /// <param name="smtpHost">Host name of the SMTP server or relay.</param>
+        /// <param name="port">An integer port number.</param>
+        /// <param name="ssl">Boolean value for enabling SSL.</param>
+        /// <returns>this, MimeMessage to allow fluent design.</returns>
         public static MimeMessage Send(this MimeMessage mimeMessage, string smtpHost, int port, bool ssl)
         {
             return mimeMessage.Send(smtpHost, port, ssl, "", "");
         }
+        //
+        /// <summary>
+        /// Synchronously send a (this) MimeMessage via the MailKit's SmtpClient.
+        /// <note type="note">
+        /// This will invoke the following method:
+        /// Send(this mimeMessage, smtpHost, port, ssl, userName, passWord)
+        /// The above invocation assumes the following parameters:
+        /// <list type="bullet">
+        /// <item><description>A smtpHost of localhost.</description></item>
+        /// <item><description>A SMTP port number of 25.</description></item>
+        /// <item><description>An enable SSL of false.</description></item>
+        /// <item><description>A userName of empty string.</description></item>
+        /// <item><description>A passWord of empty string.</description></item>
+        /// </list>
+        /// </note>
+        /// </summary>
+        /// <param name="mimeMessage">This MimeMessage.</param>
+        /// <returns>this, MimeMessage to allow fluent design.</returns>
         public static MimeMessage Send(this MimeMessage mimeMessage)
         {
             return mimeMessage.Send("localhost", 25, false, "", "");
         }
         //
+        /// <summary>
+        /// Asynchronously send a (this) MimeMessage via the MailKit's SmtpClient.
+        /// </summary>
+        /// <param name="mimeMessage">This MimeMessage.</param>
+        /// <param name="smtpHost">Host name of the SMTP server or relay.</param>
+        /// <param name="port">An integer port number.</param>
+        /// <param name="ssl">Boolean value for enabling SSL.</param>
+        /// <param name="userName">Connect to the SMTP host with this userName.</param>
+        /// <param name="passWord">Connect to the SMTP host with this user name's password.</param>
+        /// <returns>this, MimeMessage to allow fluent design.</returns>
         public async static Task<MimeMessage> SendAsync(this MimeMessage mimeMessage, string smtpHost, int port, bool ssl, string userName, string passWord)
         {
             using (SmtpClient _client = new SmtpClient())
@@ -352,10 +493,46 @@ namespace MimeKit
             }
             return mimeMessage;
         }
+        //
+        /// <summary>
+        /// Asynchronously send a (this) MimeMessage via the MailKit's SmtpClient.
+        /// <note type="note">
+        /// This will invoke the following method:
+        /// SendAsync(this mimeMessage, smtpHost, port, ssl, userName, passWord)
+        /// The above invocation assumes the following parameters:
+        /// <list type="bullet">
+        /// <item><description>A userName of empty string.</description></item>
+        /// <item><description>A passWord of empty string.</description></item>
+        /// </list>
+        /// </note>
+        /// </summary>
+        /// <param name="mimeMessage">This MimeMessage.</param>
+        /// <param name="smtpHost">Host name of the SMTP server or relay.</param>
+        /// <param name="port">An integer port number.</param>
+        /// <param name="ssl">Boolean value for enabling SSL.</param>
+        /// <returns>this, MimeMessage to allow fluent design.</returns>
         public async static Task<MimeMessage> SendAsync(this MimeMessage mimeMessage, string smtpHost, int port, bool ssl)
         {
             return await mimeMessage.SendAsync(smtpHost, port, ssl, "", "");
         }
+        //
+        /// <summary>
+        /// Asynchronously send a (this) MimeMessage via the MailKit's SmtpClient.
+        /// <note type="note">
+        /// This will invoke the following method:
+        /// SendAsync(this mimeMessage, smtpHost, port, ssl, userName, passWord)
+        /// The above invocation assumes the following parameters:
+        /// <list type="bullet">
+        /// <item><description>A smtpHost of localhost.</description></item>
+        /// <item><description>A SMTP port number of 25.</description></item>
+        /// <item><description>An enable SSL of false.</description></item>
+        /// <item><description>A userName of empty string.</description></item>
+        /// <item><description>A passWord of empty string.</description></item>
+        /// </list>
+        /// </note>
+        /// </summary>
+        /// <param name="mimeMessage">This MimeMessage.</param>
+        /// <returns>this, MimeMessage to allow fluent design.</returns>
         public async static Task<MimeMessage> SendAsync(this MimeMessage mimeMessage)
         {
             return await mimeMessage.SendAsync("localhost", 25, false, "", "");
