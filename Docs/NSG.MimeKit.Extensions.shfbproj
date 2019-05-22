@@ -6,8 +6,8 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2fd8dcd0-c41d-44a4-839b-19e73e506e46}</ProjectGuid>
-    <SHFBSchemaVersion>2015.6.5.0</SHFBSchemaVersion>
+    <ProjectGuid>{2430c404-21c7-40ff-801e-ef9bd60ac316}</ProjectGuid>
+    <SHFBSchemaVersion>2017.9.26.0</SHFBSchemaVersion>
     <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual Studio adds them anyway -->
     <AssemblyName>Documentation</AssemblyName>
     <RootNamespace>Documentation</RootNamespace>
@@ -15,42 +15,40 @@
     <!-- SHFB properties -->
     <FrameworkVersion>Cross-platform (.NET Core/.NET Standard)</FrameworkVersion>
     <OutputPath>Help\</OutputPath>
-    <HtmlHelpName>NSG.MimeKit.Extensions</HtmlHelpName>
+    <HtmlHelpName>Documentation</HtmlHelpName>
     <Language>en-US</Language>
-    <HelpFileVersion>1.0.0.0</HelpFileVersion>
-    <MaximumGroupParts>2</MaximumGroupParts>
-    <NamespaceGrouping>False</NamespaceGrouping>
-    <SyntaxFilters>C#, Visual Basic, F#</SyntaxFilters>
-    <SdkLinkTarget>Blank</SdkLinkTarget>
-    <RootNamespaceContainer>False</RootNamespaceContainer>
-    <PresentationStyle>VS2013</PresentationStyle>
-    <Preliminary>False</Preliminary>
-    <NamingMethod>Guid</NamingMethod>
-    <HelpTitle>A Sandcastle Documented Class Library</HelpTitle>
-    <ContentPlacement>AboveNamespaces</ContentPlacement>
-    <WebsiteSdkLinkType>None</WebsiteSdkLinkType>
-    <HtmlSdkLinkType>None</HtmlSdkLinkType>
-    <IncludeFavorites>False</IncludeFavorites>
-    <BinaryTOC>True</BinaryTOC>
-    <TocParentId>-1</TocParentId>
-    <TocParentVersion>100</TocParentVersion>
-    <TopicVersion>100</TopicVersion>
-    <TocOrder>-1</TocOrder>
-    <MSHelpViewerSdkLinkType>None</MSHelpViewerSdkLinkType>
-    <CatalogVersion>100</CatalogVersion>
-    <CatalogProductId>VS</CatalogProductId>
-    <DocumentationSources>
-      <DocumentationSource sourceFile="..\NSG.MimeKit.Extensions\bin\Debug\netstandard2.0\MimeKit.Extensions.dll" />
-<DocumentationSource sourceFile="..\NSG.MimeKit.Extensions\bin\Debug\netstandard2.0\MimeKit.Extensions.xml" /></DocumentationSources>
-    <WarnOnMissingSourceContext>False</WarnOnMissingSourceContext>
-    <HtmlHelp1xCompilerPath>C:\Program Files (x86)\HTML Help Workshop\</HtmlHelp1xCompilerPath>
-    <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
-    <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <HelpFileFormat>HtmlHelp1</HelpFileFormat>
-    <IndentHtml>False</IndentHtml>
+    <SyntaxFilters>C#, Visual Basic, F#</SyntaxFilters>
+    <PresentationStyle>VS2013</PresentationStyle>
+    <CleanIntermediates>True</CleanIntermediates>
     <KeepLogFile>True</KeepLogFile>
     <DisableCodeBlockComponent>False</DisableCodeBlockComponent>
-    <CleanIntermediates>True</CleanIntermediates>
+    <IndentHtml>False</IndentHtml>
+    <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
+    <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
+    <HelpTitle>A Sandcastle Documented Class Library</HelpTitle>
+    <HelpFileVersion>1.0.0.0</HelpFileVersion>
+    <RootNamespaceContainer>True</RootNamespaceContainer>
+    <RootNamespaceTitle>NSG.MimeKit.Extensions</RootNamespaceTitle>
+    <NamespaceGrouping>True</NamespaceGrouping>
+    <MaximumGroupParts>2</MaximumGroupParts>
+    <Preliminary>False</Preliminary>
+    <CopyrightHref>Copyright NSG %28c%29 2019</CopyrightHref>
+    <SdkLinkTarget>Blank</SdkLinkTarget>
+    <DocumentationSources>
+      <DocumentationSource sourceFile="..\NSG.MimeKit.Extensions\bin\Debug\netstandard2.0\MimeKit.Extensions.dll" />
+<DocumentationSource sourceFile="..\NSG.MimeKit.Extensions\bin\Debug\netstandard2.0\MimeKit.Extensions.xml" />
+<DocumentationSource sourceFile="..\..\..\..\..\..\..\Users\Phil\.nuget\packages\mimekit\2.1.5.1\lib\netstandard2.0\MimeKit.dll" />
+<DocumentationSource sourceFile="..\..\..\..\..\..\..\Users\Phil\.nuget\packages\mimekit\2.1.5.1\lib\netstandard2.0\MimeKit.xml" />
+<DocumentationSource sourceFile="..\..\..\..\..\..\..\Users\Phil\.nuget\packages\mailkit\2.1.5.1\lib\netstandard2.0\MailKit.dll" />
+<DocumentationSource sourceFile="..\..\..\..\..\..\..\Users\Phil\.nuget\packages\mailkit\2.1.5.1\lib\netstandard2.0\MailKit.xml" />
+<DocumentationSource sourceFile="..\..\..\..\..\..\..\Users\Phil\.nuget\packages\portable.bouncycastle\1.8.2\lib\netstandard2.0\BouncyCastle.Crypto.dll" />
+<DocumentationSource sourceFile="..\..\..\..\..\..\..\Users\Phil\.nuget\packages\portable.bouncycastle\1.8.2\lib\netstandard2.0\BouncyCastle.Crypto.xml" />
+<DocumentationSource sourceFile="NameSpace\MailKit.External.xml" />
+<DocumentationSource sourceFile="NameSpace\MimeKit.External.xml" /></DocumentationSources>
+    <HtmlHelp1xCompilerPath>C:\Program Files (x86)\HTML Help Workshop\</HtmlHelp1xCompilerPath>
+    <WarnOnMissingSourceContext>False</WarnOnMissingSourceContext>
+    <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, TypeParameter, AutoDocumentDispose</MissingTags>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
@@ -81,7 +79,4 @@
     </PostBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="C:\Dat\Nsg\L\Web\Ng\NSG.MimeKit\NSG.MimeKit.Extensions\NSG.MimeKit.Extensions.csproj" />
-  </ItemGroup>
 </Project>

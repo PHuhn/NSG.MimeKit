@@ -321,7 +321,7 @@ namespace MimeKit
         /// <summary>
         /// Add an attachment to the mail message.
         /// <example>
-        /// This sample shows how to call this constructor.
+        /// This sample shows how to call attachment.
         /// <code>
         ///  using MimeKit;
         ///  using MailKit.Net.Smtp;

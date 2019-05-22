@@ -1,4 +1,7 @@
 ﻿
-Installing-Package MailKit -version 2.1.4.
+Install-Package MailKit -version 2.1.5.1
+Install-Package MimeKit -Version 2.1.5.1
 
 The namespace is 'MimeKit'
+
+Install-Package EWSoftware.SHFB -Version 2019.4.14

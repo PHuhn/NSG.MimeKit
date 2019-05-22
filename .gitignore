@@ -21,6 +21,8 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+[Dd]ocs/Help/Working
+
 
 # Angular
 node_modules/

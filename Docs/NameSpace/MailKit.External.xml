@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>_NamespaceComments_</name>
+  </assembly>
+  <members>
+    <member name="R:Project_NSG_MimeKit">
+      <summary>
+          Extensions of MimeKit.
+      </summary>
+    </member>
+    <member name="N:">
+      <exclude />
+      <summary>
+        Exclude the global namespace from the help file.
+      </summary>
+    </member>
+    <member name="N:MailKit.Internal">
+      <exclude />
+    </member>
+    <member name="N:MailKit">
+      <summary>
+        MailKit .
+      </summary>
+    </member>
+  </members>
+</doc>
