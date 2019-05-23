@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSG.MimeKit.Extensions", "NSG.MimeKit.Extensions\NSG.MimeKit.Extensions.csproj", "{392877C8-C6BE-41EB-8727-7F8B91BCC7CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSG.MimeKit.Extensions", "NSG.MimeKit.Extensions\NSG.MimeKit.Extensions.csproj", "{392877C8-C6BE-41EB-8727-7F8B91BCC7CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSG.MimeKit_Tests", "NSG.MimeKit_Tests\NSG.MimeKit_Tests.csproj", "{D57FCE65-E0A6-427B-850B-8043D93D429C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSG.MimeKit_Tests", "NSG.MimeKit_Tests\NSG.MimeKit_Tests.csproj", "{D57FCE65-E0A6-427B-850B-8043D93D429C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSG.MimeKit.SendGrid.Extensions", "NSG.MimeKit.SendGrid.Extensions\NSG.MimeKit.SendGrid.Extensions.csproj", "{316C819F-7C22-4608-9DC6-A928DD93B414}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{D57FCE65-E0A6-427B-850B-8043D93D429C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D57FCE65-E0A6-427B-850B-8043D93D429C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D57FCE65-E0A6-427B-850B-8043D93D429C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{316C819F-7C22-4608-9DC6-A928DD93B414}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{316C819F-7C22-4608-9DC6-A928DD93B414}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{316C819F-7C22-4608-9DC6-A928DD93B414}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{316C819F-7C22-4608-9DC6-A928DD93B414}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

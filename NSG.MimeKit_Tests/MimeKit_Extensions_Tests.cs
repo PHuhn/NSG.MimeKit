@@ -4,7 +4,7 @@ using MimeKit;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 //
-namespace NSG.Library_Tests
+namespace NSG.MimeKit_Tests
 {
     [TestClass]
     public class MimeKit_Extensions_Tests

@@ -2,6 +2,7 @@
 ## Overview
 This solution contains .Net Standard projects as follows:
 - A collection of support functions for MimeKit (NSG.MimeKit.Extensions)
+- A collection of support functions for MimeKit and SendGrid (NSG.MimeKit.SendGrid.Extensions)
 
 ## NSG.MimeKit.Extensions
 
@@ -17,6 +18,10 @@ Task<MimeMessage> _email = (new MimeMessage())
             .Attachment(_buffer, "Text.txt", "text/plain;charset=utf-8")
     ).SendAsync(); // "localhost", 25, false, "", "");
 ```
+
+## NSG.MimeKit.SendGrid.Extensions ##
+
+Translation of SendGridMessage to MimeMessage.
 
 ## NSG.MimeKit_Tests
 

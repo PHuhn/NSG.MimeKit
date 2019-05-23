@@ -5,3 +5,6 @@ Install-Package MimeKit -Version 2.1.5.1
 The namespace is 'MimeKit'
 
 Install-Package EWSoftware.SHFB -Version 2019.4.14
+
+Install-Package Sendgrid -Version 9.11.0
+
