@@ -4,8 +4,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>MimeKit</RootNamespace>
     <AssemblyName>MimeKit.Extensions</AssemblyName>
-    <Version>1.0.3.17</Version>
-    <Copyright>Copyright ©  2019</Copyright>
+    <Version>1.0.4.17</Version>
+    <AssemblyVersion>1.0.4.17</AssemblyVersion>
+    <FileVersion>1.0.4.17</FileVersion>
+    <Copyright>Copyright © 2019</Copyright>
     <Company>Northern Software Group</Company>
     <Authors>Phil Huhn (NSG)</Authors>
     <Description>A fluent interface to MimeKit and BodyBuilder classes</Description>
@@ -21,7 +23,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MailKit" Version="2.1.4" />
+    <PackageReference Include="MailKit" Version="2.3.2" />
+    <PackageReference Include="MimeKit" Version="2.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

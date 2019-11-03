@@ -6,16 +6,25 @@ using SendGrid.Helpers.Mail;
 //
 namespace MimeKit
 {
+    //
+    /// <summary>
+    /// Namespace of MimeKit. MimeKit is an external namespace from the 
+    /// MailKit/MimeKit libraries. This appends to the MimeKit namespace
+    /// and extends the MimeMessage and BodyBuilder classes.
+    /// </summary>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
+    {
+    }
     // 
     /// <summary>
-    /// A fluent interface for smtp mail
+    /// SendGrid message conversion.
     /// </summary>
-    /// <remarks>Example: new EMail( from, to, "Subject", "Body").Send()</remarks>
     public static class SendGridExtensions
     {
         //
         /// <summary>
-        /// lambda method to move MailboxAddress email address to a 
+        /// lambda method to move MimeKit MailboxAddress email address to a 
         /// new SendGrid EmailAddress address.
         /// </summary>
         /// <param name="address">a MailboxAddress email address</param>
@@ -24,26 +33,25 @@ namespace MimeKit
         //
         /// <summary>
         /// lambda method to move SendGrid EmailAddress email address to a 
-        /// new MS SMTP MailboxAddress address.
+        /// new MimeKit MailboxAddress address.
         /// </summary>
         /// <param name="address">a SendGrid EmailAddress email address</param>
-        /// <returns>a new MS SMTP MailboxAddress address</returns>
+        /// <returns>a new MimeKit MailboxAddress address</returns>
         public static MailboxAddress ConvertToMailboxAddress(EmailAddress address) => new MailboxAddress(address.Name, address.Email);
         //
         /// <summary>
-        /// Convert a SendGridMessage mail message, and load it into a new message.
+        /// Convert a SendGridMessage mail message, and load it into a new mime message.
         /// <example>
-        /// This sample shows how to call the NewMailMessage method.
+        /// This sample shows how to call the NewMimeMessage method.
         /// <code>
-        ///  // translate the message from json string of SendGrid message type
-        ///  JavaScriptSerializer j = new JavaScriptSerializer();
-        ///  SendGridMessage _sgm = (SendGridMessage)j.Deserialize(_jsonString, typeof(SendGridMessage));
-        ///  MimeMessage _email = new EMail(Log.Logger).NewMailMessage(_sgm).Send();
+        ///  // translate the message from SendGridMessage to MimeMessage
+        ///  SendGridMessage _sgm = MailHelper.CreateSingleEmail(_from, _to, _subject, _plainTextContent, null);
+        ///  MimeMessage _email = SendGridExtensions.NewMailMessage(_sgm);
         /// </code>
         /// </example>
         /// </summary>
-        /// <param name="sgm">a SendGridMessage mail message from SendGrid.Helpers.Mail</param>
-        /// <returns>itself, MimeMessage to allow fluent design.</returns>
+        /// <param name="sgm">A SendGrid.Helpers.Mail.SendGridMessage mail message.</param>
+        /// <returns>A new MimeMessage to allow fluent design.</returns>
         public static MimeMessage NewMimeMessage( SendGridMessage sgm )
         {
             //

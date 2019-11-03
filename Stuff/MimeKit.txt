@@ -1,0 +1,36 @@
+* SparkPost (free up to 100,000 emails per month)
+* Mailgun (free up to 10,000 emails per month)
+* Mailjet (free up to 6,000 emails per month)
+* Amazon SES
+* SendGrid
+
+Sending Email Using Mailkit #4 - Asp.Net Core 2
+https://www.youtube.com/watch?v=Y2X5wtuzuX4
+
+https://steemit.com/utopian-io/@babelek/how-to-send-email-using-asp-net-core-2-0
+https://www.joeaudette.com/blog/2016/05/08/sending-smtp-email-on-aspnet-core-with-mailkit
+
+MVC Services
+* https://www.taithienbo.com/send-email-with-attachments-using-mailkit-for-net-core/
+* https://www.excitoninteractive.com/articles/read/70/asp-net-core2/emailing-exceptions
+
+https://www.youtube.com/watch?v=C4O8vqg295o
+===========================================
+using MimeKit;
+using MailKit.Net.Smtp
+
+var message = new MineMessage();
+message.From.Add( new MailboxAddress("username", "username@gmail.com"));
+message.To.Add( new MailboxAddress("tousername", "tousername@gmail.com"));
+message.Subject = "Subject";
+message.Body = new TextPart( "plain" )
+{
+	Text = "Hello mail message.";
+}
+using ( var client = new SmtpClient() )
+{
+	client.Connect( "smtp.gmail.com", 587, false );
+	client.Authenticate( "username@gmail.com", "p@ssW0rd8" );
+	client.Send( message );
+	client.Disconnect( true );
+}

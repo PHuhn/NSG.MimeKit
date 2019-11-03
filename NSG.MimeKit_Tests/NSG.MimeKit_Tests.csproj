@@ -1,23 +1,38 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <Version>1.0.4.17</Version>
+    <AssemblyVersion>1.0.4.17</AssemblyVersion>
+    <FileVersion>1.0.4.17</FileVersion>
+    <Company>Northern Software Group</Company>
+    <Authors>Phil Huhn (NSG)</Authors>
+    <Copyright>Copyright © 2019</Copyright>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MailKit" Version="2.1.5.1" />
+    <PackageReference Include="MailKit" Version="2.3.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.2.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
-    <PackageReference Include="MimeKit" Version="2.1.5.1" />
+    <PackageReference Include="MimeKit" Version="2.3.2" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
     <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
-    <PackageReference Include="Sendgrid" Version="9.11.0" />
+    <PackageReference Include="Sendgrid" Version="9.12.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\NSG.MimeKit.Extensions\NSG.MimeKit.Extensions.csproj" />
     <ProjectReference Include="..\NSG.MimeKit.SendGrid.Extensions\NSG.MimeKit.SendGrid.Extensions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

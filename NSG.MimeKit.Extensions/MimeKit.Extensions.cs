@@ -2,6 +2,7 @@
 using MimeKit;
 using MailKit.Net.Smtp;
 using System.Threading.Tasks;
+using System.Linq;
 //
 namespace MimeKit
 {
@@ -74,7 +75,7 @@ namespace MimeKit
         /// <returns>this, MimeMessage to allow fluent design.</returns>
         public static MimeMessage From(this MimeMessage mimeMessage, string fromAddress, string name)
         {
-            mimeMessage.From.Add(new MailboxAddress(fromAddress, name));
+            mimeMessage.From.Add(new MailboxAddress(name, fromAddress));
             return mimeMessage;
         }
         //
@@ -119,7 +120,7 @@ namespace MimeKit
         /// <returns>this, MimeMessage to allow fluent design.</returns>
         public static MimeMessage To(this MimeMessage mimeMessage, string toAddress, string name)
         {
-            mimeMessage.To.Add(new MailboxAddress(toAddress, name));
+            mimeMessage.To.Add(new MailboxAddress(name, toAddress));
             return mimeMessage;
         }
         //
@@ -164,7 +165,7 @@ namespace MimeKit
         /// <returns>this, MimeMessage to allow fluent design.</returns>
         public static MimeMessage CC(this MimeMessage mimeMessage, string ccAddress, string name)
         {
-            mimeMessage.Cc.Add(new MailboxAddress(ccAddress, name));
+            mimeMessage.Cc.Add(new MailboxAddress(name, ccAddress));
             return mimeMessage;
         }
         //
@@ -209,7 +210,7 @@ namespace MimeKit
         /// <returns>this, MimeMessage to allow fluent design.</returns>
         public static MimeMessage BCC(this MimeMessage mimeMessage, string bccAddress, string name)
         {
-            mimeMessage.Bcc.Add(new MailboxAddress(bccAddress, name));
+            mimeMessage.Bcc.Add(new MailboxAddress(name, bccAddress));
             return mimeMessage;
         }
         //
@@ -538,7 +539,49 @@ namespace MimeKit
             return await mimeMessage.SendAsync("localhost", 25, false, "", "");
         }
         //
+        /// <summary>
+        /// Asynchronously send a (this) MimeMessage via the MailKit's SmtpClient.
+        /// <note type="note">
+        /// This will invoke the following method:
+        /// SendAsync(this mimeMessage, smtpHost, port, ssl, userName, passWord)
+        /// </note>
+        /// </summary>
+        /// <param name="mimeMessage">This MimeMessage.</param>
+        /// <param name="emailSettings">Email settings configuration class.</param>
+        /// <returns>this, MimeMessage to allow fluent design.</returns>
+        public async static Task<MimeMessage> SendAsync(this MimeMessage mimeMessage, MimeKit.NSG.EmailSettings emailSettings)
+        {
+            return await mimeMessage.SendAsync(emailSettings.SmtpHost, emailSettings.SmtpPort, emailSettings.EnableSsl, emailSettings.UserName, emailSettings.Password);
+        }
+        //
         #endregion // Send
+        //
+        //  string EmailToString(this mimeMessage)
+        //
+        #region "Email ToString"
+        //
+        /// <summary>
+        /// Format a string of the current mail message
+        /// </summary>
+        /// <returns>formated string of a mail message</returns>
+        public static string EmailToString(this MimeMessage mimeMessage)
+        {
+            //
+            string _attachments = string.Join("", mimeMessage.Attachments.Select(_a => ", Attachment: " + _a.ContentType + " ").ToList());
+            string _tos = string.Join("", mimeMessage.To.Mailboxes.Select(_t => string.Format("'{0}' <{1}> ", _t.Name, _t.Address)).ToList());
+            string _ccs = string.Join("", mimeMessage.Cc.Mailboxes.Select(_t => string.Format("'{0}' <{1}> ", _t.Name, _t.Address)).ToList());
+            if (!string.IsNullOrEmpty(_ccs))
+                _ccs = "CC: " + _ccs + ", ";
+            //
+            string _message = mimeMessage.TextBody;
+            if (string.IsNullOrEmpty(_message))
+                _message = mimeMessage.HtmlBody;
+            return String.Format("From: {0}, To: {1}, {2}Subject: {3}, Body: {4} {5}",
+                mimeMessage.From.ToString(),
+                _tos, _ccs, mimeMessage.Subject, _message, _attachments);
+        }
+        //
+        #endregion // Email ToString
         //
     }
 }
