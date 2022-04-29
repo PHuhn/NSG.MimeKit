@@ -6,6 +6,7 @@ using System.Net.Mail;
 using System.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Linq;
 using Newtonsoft.Json;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 //
@@ -103,6 +104,23 @@ namespace NSG.MimeKit_Tests
                 Assert.AreEqual("Content-Type: text/plain; name=\"AbuseReport.txt\"", _item.ContentType.ToString());
             }
             Assert.AreEqual(1, _count);
+            //
+        }
+        //
+        [TestMethod]
+        public void SendGrid_NewMailMessage_Json_Test()
+        {
+            //
+            string _sgString = @"{""content"":[{""value"":""Hi Stop the intrusion from your IP address 54.183.209.144."",""type"":""text/plain""}],""Personalizations"":[{""to"":[{""Name"":"""",""Email"":""abuse@amazonaws.com""}],""Ccs"":[],""Bccs"":[],""Subject"":""ViewState probe from 54.183.209.144""}],""From"":{""email"":""PhilHuhn@yahoo.com"",""name"":""Phil Huhn""},""Subject"":""ViewState probe from 54.183.209.144"",""Attachments"":[],""HtmlContent"":"""",""PlainTextContent"":""""}";
+            SendGridMessage _sgMessage = JsonConvert.DeserializeObject<SendGridMessage>(_sgString);
+
+            // (_from, _to, _subject, _plainTextContent, null);
+            MimeMessage _mimeMessage = SendGridExtensions.NewMimeMessage(_sgMessage);
+            //
+            Assert.AreEqual("abuse@amazonaws.com", _mimeMessage.To.Mailboxes.FirstOrDefault().Address);
+            Assert.AreEqual("PhilHuhn@yahoo.com", _mimeMessage.From.Mailboxes.FirstOrDefault().Address);
+            Assert.AreEqual("ViewState probe from 54.183.209.144", _mimeMessage.Subject);
+            Assert.AreEqual("Hi Stop the intrusion from your IP address 54.183.209.144.", _mimeMessage.TextBody);
             //
         }
         //

@@ -58,7 +58,7 @@ namespace MimeKit
             var _mimeMessage = new MimeMessage();
             //
             _mimeMessage.From.Add( ConvertToMailboxAddress(sgm.From) );
-            foreach( var per in sgm.Personalizations )
+            foreach(Personalization per in sgm.Personalizations )
             {
                 foreach ( var to in per.Tos )
                     _mimeMessage.To.Add( ConvertToMailboxAddress( to ) );
