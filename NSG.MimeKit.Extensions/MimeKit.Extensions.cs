@@ -62,7 +62,7 @@ namespace MimeKit
         /// <returns>this, MimeMessage to allow fluent design.</returns>
         public static MimeMessage From(this MimeMessage mimeMessage, string fromAddress)
         {
-            mimeMessage.From.Add(new MailboxAddress(fromAddress));
+            mimeMessage.From.Add(new MailboxAddress("", fromAddress));
             return mimeMessage;
         }
         //
@@ -107,7 +107,7 @@ namespace MimeKit
         /// <returns>this, MimeMessage to allow fluent design.</returns>
         public static MimeMessage To(this MimeMessage mimeMessage, string toAddress)
         {
-            mimeMessage.To.Add(new MailboxAddress(toAddress));
+            mimeMessage.To.Add(new MailboxAddress("", toAddress));
             return mimeMessage;
         }
         //
@@ -152,7 +152,7 @@ namespace MimeKit
         /// <returns>this, MimeMessage to allow fluent design.</returns>
         public static MimeMessage CC(this MimeMessage mimeMessage, string ccAddress)
         {
-            mimeMessage.Cc.Add(new MailboxAddress(ccAddress));
+            mimeMessage.Cc.Add(new MailboxAddress("", ccAddress));
             return mimeMessage;
         }
         //
@@ -197,7 +197,7 @@ namespace MimeKit
         /// <returns>this, MimeMessage to allow fluent design.</returns>
         public static MimeMessage BCC(this MimeMessage mimeMessage, string bccAddress)
         {
-            mimeMessage.Bcc.Add(new MailboxAddress(bccAddress));
+            mimeMessage.Bcc.Add(new MailboxAddress("", bccAddress));
             return mimeMessage;
         }
         //
