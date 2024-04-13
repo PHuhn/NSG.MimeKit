@@ -1,27 +1,31 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+//
 using Microsoft.Extensions.Configuration;
+//
 using MimeKit;
+using NUnit.Framework;
 //
 namespace NSG.MimeKit_Tests
 {
-    [TestClass]
     public class MimeKit_Extensions_Tests
     {
         //
-        [TestMethod]
+        [SetUp]
+        public void Setup()
+        {
+        }
+        //
+        [Test]
         public void MimeKit_Extensions_NewMimeMessage01_Test()
         {
             //
             MimeMessage _email = Extensions.NewMimeMessage()
                 .From("FromUser1@somewhere.com");
             Console.WriteLine(_email);
-            Assert.IsNotNull(_email);
+            Assert.That(_email, Is.Not.Null);
             //
         }
         //
@@ -31,7 +35,7 @@ namespace NSG.MimeKit_Tests
         //
         #region "From"
         //
-        [TestMethod]
+        [Test]
         public void MimeKit_Extensions_From01_Test()
         {
             //
@@ -46,11 +50,11 @@ namespace NSG.MimeKit_Tests
             string _actual = _email.From[0].ToString();
             string _expected = _fromAddress;
             Console.WriteLine(_expected + " " + _actual);
-            Assert.AreEqual(_expected, _actual);
+            Assert.That(_actual, Is.EqualTo(_expected));
             //
         }
         //
-        [TestMethod]
+        [Test]
         public void MimeKit_Extensions_From02_Test()
         {
             //
@@ -66,11 +70,11 @@ namespace NSG.MimeKit_Tests
             string _actual = _email.From[0].ToString();
             string _expected = string.Format("\"{0}\" <{1}>", _fromName, _fromAddress);
             Console.WriteLine(_expected + " " + _actual);
-            Assert.AreEqual(_expected, _actual);
+            Assert.That(_actual, Is.EqualTo(_expected));
             //
         }
         //
-        [TestMethod]
+        [Test]
         public void MimeKit_Extensions_From03_Test()
         {
             //
@@ -86,7 +90,7 @@ namespace NSG.MimeKit_Tests
             string _actual = _email.From[0].ToString();
             string _expected = string.Format("\"{0}\" <{1}>", _fromName, _fromAddress);
             Console.WriteLine(_expected + " " + _actual);
-            Assert.AreEqual(_expected, _actual);
+            Assert.That(_actual, Is.EqualTo(_expected));
             //
         }
         //
@@ -99,7 +103,7 @@ namespace NSG.MimeKit_Tests
         //
         #region "To"
         // 
-        [TestMethod]
+        [Test]
         public void MimeKit_Extensions_To01_Test()
         {
             //
@@ -115,11 +119,11 @@ namespace NSG.MimeKit_Tests
             string _actual = _email.To[0].ToString();
             string _expected = _toAddress;
             Console.WriteLine(_expected + " " + _actual);
-            Assert.AreEqual(_expected, _actual);
+            Assert.That(_actual, Is.EqualTo(_expected));
             //
         }
         //
-        [TestMethod]
+        [Test]
         public void MimeKit_Extensions_To02_Test()
         {
             //
@@ -135,11 +139,11 @@ namespace NSG.MimeKit_Tests
             string _actual = _email.To[0].ToString();
             string _expected = string.Format("\"{0}\" <{1}>", _toName, _toAddress);
             Console.WriteLine(_expected + " " + _actual);
-            Assert.AreEqual(_expected, _actual);
+            Assert.That(_actual, Is.EqualTo(_expected));
             //
         }
         //
-        [TestMethod]
+        [Test]
         public void MimeKit_Extensions_To03_Test()
         {
             //
@@ -155,11 +159,11 @@ namespace NSG.MimeKit_Tests
             string _actual = _email.To[0].ToString();
             string _expected = string.Format("\"{0}\" <{1}>", _toName, _toAddress);
             Console.WriteLine(_expected + " " + _actual);
-            Assert.AreEqual(_expected, _actual);
+            Assert.That(_actual, Is.EqualTo(_expected));
             //
         }
         //
-        [TestMethod]
+        [Test]
         public void MimeKit_Extensions_To04_Test()
         {
             //
@@ -175,12 +179,12 @@ namespace NSG.MimeKit_Tests
             string _actual = _email.To[0].ToString();
             string _expected = string.Format("\"{0}\" <{1}>", _toName, _toAddress);
             Console.WriteLine(_expected + " " + _actual);
-            Assert.AreEqual(_expected, _actual);
+            Assert.That(_actual, Is.EqualTo(_expected));
             //
             string _actual2 = _email.To[1].ToString();
             string _expected2 = string.Format("\"{0}\" <{1}>", _toName2, _toAddress2);
             Console.WriteLine(_expected2 + " " + _actual2);
-            Assert.AreEqual(_expected2, _actual2);
+            Assert.That(_actual2, Is.EqualTo(_expected2));
             //
         }
         //
@@ -192,7 +196,7 @@ namespace NSG.MimeKit_Tests
         //
         #region "CC"
         //
-        [TestMethod]
+        [Test]
         public void MimeKit_Extensions_CC01_Test()
         {
             //
@@ -208,11 +212,11 @@ namespace NSG.MimeKit_Tests
             string _actual = _email.Cc[0].ToString();
             string _expected = _ccAddress;
             Console.WriteLine(_expected + " " + _actual);
-            Assert.AreEqual(_expected, _actual);
+            Assert.That(_actual, Is.EqualTo(_expected));
             //
         }
         //
-        [TestMethod]
+        [Test]
         public void MimeKit_Extensions_CC02_Test()
         {
             //
@@ -228,11 +232,11 @@ namespace NSG.MimeKit_Tests
             string _actual = _email.Cc[0].ToString();
             string _expected = string.Format("\"{0}\" <{1}>", _ccName, _ccAddress);
             Console.WriteLine(_expected + " " + _actual);
-            Assert.AreEqual(_expected, _actual);
+            Assert.That(_actual, Is.EqualTo(_expected));
             //
         }
         //
-        [TestMethod]
+        [Test]
         public void MimeKit_Extensions_CC03_Test()
         {
             //
@@ -248,7 +252,7 @@ namespace NSG.MimeKit_Tests
             string _actual = _email.Cc[0].ToString();
             string _expected = string.Format("\"{0}\" <{1}>", _ccName, _ccAddress);
             Console.WriteLine(_expected + " " + _actual);
-            Assert.AreEqual(_expected, _actual);
+            Assert.That(_actual, Is.EqualTo(_expected));
             //
         }
         //
@@ -260,7 +264,7 @@ namespace NSG.MimeKit_Tests
         //
         #region "BCC"
         //
-        [TestMethod]
+        [Test]
         public void MimeKit_Extensions_BCC01_Test()
         {
             //
@@ -276,11 +280,11 @@ namespace NSG.MimeKit_Tests
             string _actual = _email.Bcc[0].ToString();
             string _expected = _bccAddress;
             Console.WriteLine(_expected + " " + _actual);
-            Assert.AreEqual(_expected, _actual);
+            Assert.That(_actual, Is.EqualTo(_expected));
             //
         }
         //
-        [TestMethod]
+        [Test]
         public void MimeKit_Extensions_BCC02_Test()
         {
             //
@@ -296,11 +300,11 @@ namespace NSG.MimeKit_Tests
             string _actual = _email.Bcc[0].ToString();
             string _expected = string.Format("\"{0}\" <{1}>", _bccName, _bccAddress);
             Console.WriteLine(_expected + " " + _actual);
-            Assert.AreEqual(_expected, _actual);
+            Assert.That(_actual, Is.EqualTo(_expected));
             //
         }
         //
-        [TestMethod]
+        [Test]
         public void MimeKit_Extensions_BCC03_Test()
         {
             //
@@ -316,13 +320,13 @@ namespace NSG.MimeKit_Tests
             string _actual = _email.Bcc[0].ToString();
             string _expected = string.Format("\"{0}\" <{1}>", _bccName, _bccAddress);
             Console.WriteLine(_expected + " " + _actual);
-            Assert.AreEqual(_expected, _actual);
+            Assert.That(_actual, Is.EqualTo(_expected));
             //
         }
         //
         #endregion // BCC
         //
-        [TestMethod]
+        [Test]
         public void MimeKit_Extensions_Subject01_Test()
         {
             //
@@ -334,11 +338,11 @@ namespace NSG.MimeKit_Tests
             string _actual = _email.Subject;
             string _expected = _subject;
             Console.WriteLine(_expected + " " + _actual);
-            Assert.AreEqual(_expected, _actual);
+            Assert.That(_actual, Is.EqualTo(_expected));
             //
         }
         //
-        [TestMethod]
+        [Test]
         public void MimeKit_Extensions_TextBody01_Test()
         {
             //
@@ -352,11 +356,11 @@ namespace NSG.MimeKit_Tests
             string _actual = _email.TextBody;
             string _expected = _message;
             Console.WriteLine(_expected + " " + _actual);
-            Assert.AreEqual(_expected, _actual);
+            Assert.That(_actual, Is.EqualTo(_expected));
             //
         }
         //
-        [TestMethod]
+        [Test]
         public void MimeKit_Extensions_HtmlBody01_Test()
         {
             //
@@ -370,11 +374,11 @@ namespace NSG.MimeKit_Tests
             string _actual = _email.HtmlBody;
             string _expected = _message;
             Console.WriteLine(_expected + " " + _actual);
-            Assert.AreEqual(_expected, _actual);
+            Assert.That(_actual, Is.EqualTo(_expected));
             //
         }
         //
-        [TestMethod]
+        [Test]
         public void MimeKit_Extensions_Attachment01_Test()
         {
             //
@@ -392,14 +396,14 @@ namespace NSG.MimeKit_Tests
             string _actual = _email.TextBody;
             string _expected = _message;
             Console.WriteLine(_expected + " " + _actual);
-            Assert.AreEqual(_expected, _actual);
+            Assert.That(_actual, Is.EqualTo(_expected));
             foreach (var _attachment in _email.Attachments)
                 Console.WriteLine(_attachment.ToString());
             //
         }
         //
-        [TestMethod]
-        public void MimeKit_Extensions_SendAsync01_Test()
+        [Test]
+        public async Task MimeKit_Extensions_SendAsync01_Test()
         {
             //
             string _fromAddress = "FromUser1@somewhere.com";
@@ -407,23 +411,23 @@ namespace NSG.MimeKit_Tests
             string _subject = "Subject 1";
             string _message = "See attachment:";
             byte[] _buffer = new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x00 };
-            Task<MimeMessage> _email = (new MimeMessage())
+            MimeMessage _email = await (new MimeMessage())
                 .From(_fromAddress).To(_toAddress)
                 .Subject(_subject).Body(
                     Extensions.TextBody(_message)
                         .Attachment(_buffer, "Text.txt", "text/plain;charset=utf-8")
                 ).SendAsync(); // "localhost", 25, false, "", "");
-            string _actual = _email.Result.TextBody;
+            string _actual = _email.TextBody;
             string _expected = _message;
             Console.WriteLine(_expected + " " + _actual);
-            Assert.AreEqual(_expected, _actual);
-            foreach (var _attachment in _email.Result.Attachments)
+            Assert.That(_actual, Is.EqualTo(_expected));
+            foreach (var _attachment in _email.Attachments)
                 Console.WriteLine(_attachment.ToString());
             //
         }
         //
-        [TestMethod]
-        public void MimeKit_Extensions_Config_SendAsync02_Test()
+        [Test]
+        public async Task MimeKit_Extensions_Config_SendAsync02_Test()
         {
             //
             string appSettings = "appsettings.json";
@@ -432,6 +436,7 @@ namespace NSG.MimeKit_Tests
                     throw new FileNotFoundException($"Settings file: {appSettings} not found.");
             IConfiguration _config = new ConfigurationBuilder()
                 .AddJsonFile(appSettings, optional: true, reloadOnChange: false)
+                .AddUserSecrets<MimeKit_Extensions_Tests>()
                 .Build();
             //
             MimeKit.NSG.EmailSettings _emailSettings =
@@ -439,18 +444,18 @@ namespace NSG.MimeKit_Tests
             string _toAddress = "ToUser1@somewhere.com";
             string _subject = "Subject 1";
             string _message = "Text message 1";
-            Task<MimeMessage> _email = Extensions.NewMimeMessage()
+            MimeMessage _email = await Extensions.NewMimeMessage()
                 .From(_emailSettings.UserEmail, _emailSettings.UserName).To(_toAddress)
                 .Subject(_subject).Body(Extensions.TextBody(_message))
                 .SendAsync(_emailSettings);
-            string _actual = _email.Result.TextBody;
+            string _actual = _email.TextBody;
             string _expected = _message;
             Console.WriteLine(_expected + " " + _actual);
-            Assert.AreEqual(_expected, _actual);
+            Assert.That(_actual, Is.EqualTo(_expected));
             //
         }
         //
-        [TestMethod]
+        [Test]
         public void MimeKit_Extensions_EmailToString01_Test()
         {
             //
@@ -467,11 +472,11 @@ namespace NSG.MimeKit_Tests
             string _actual = _email.EmailToString();
             string _expected = "From: P@any.net, To: 'ToUser4' <To4@sw.com> 'To4-2' <To4-2@sw.com> , Subject: Subject 4, Body: Text message 4 ";
             Console.WriteLine(_expected + " " + _actual);
-            Assert.AreEqual(_expected, _actual);
+            Assert.That(_actual, Is.EqualTo(_expected));
             //
         }
         //
-        [TestMethod]
+        [Test]
         public void MimeKit_Extensions_EmailToString02_Test()
         {
             //
@@ -493,7 +498,7 @@ namespace NSG.MimeKit_Tests
             string _expected =
                 "From: P@any.net, To: 'ToUser2' <To2@sw.com> , CC: 'Cc2' <Cc2@sw.com> , Subject: Subject 2, Body: Text message 2 , Attachment: Content-Type: text/plain; charset=\"utf-8\"; name=\"Text.txt\" ";
             Console.WriteLine(_expected + " " + _actual);
-            Assert.AreEqual(_expected, _actual);
+            Assert.That(_actual, Is.EqualTo(_expected));
             //
         }
         //

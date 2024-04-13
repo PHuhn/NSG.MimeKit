@@ -1,28 +1,21 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.IO;
-using System.Net.Mail;
-using System.Configuration;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Linq;
+//
+using NUnit.Framework;
 using Newtonsoft.Json;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 //
 using SendGrid;
 using SendGrid.Helpers.Mail;
-//
 using MimeKit;
 //
 namespace NSG.MimeKit_Tests
 {
-    [TestClass]
     public class MimeKit_SendGrid_Extensions_Tests
     {
         //
         // public static EmailAddress ConvertToEmailAddress(MailboxAddress address) => new EmailAddress(address.Address, address.Name);
-        [TestMethod]
+        [Test]
         public void SendGrid_ConvertToEmailAddress_Test()
         {
             string _userName = "User Name";
@@ -31,12 +24,12 @@ namespace NSG.MimeKit_Tests
             EmailAddress _actual = SendGridExtensions.ConvertToEmailAddress(_mbAddress);
             Console.WriteLine(_userName + " " + _address);
             Console.WriteLine(_actual.ToString());
-            Assert.AreEqual(_userName, _actual.Name);
-            Assert.AreEqual(_address, _actual.Email);
+            Assert.That(_actual.Name, Is.EqualTo(_userName));
+            Assert.That(_actual.Email, Is.EqualTo(_address));
         }
         //
         // public static MailboxAddress ConvertToMailboxAddress(EmailAddress address) => new MailboxAddress(address.Email, address.Name);
-        [TestMethod]
+        [Test]
         public void SendGrid_ConvertToMailboxAddress_Test()
         {
             string _userName = "User Name";
@@ -45,8 +38,8 @@ namespace NSG.MimeKit_Tests
             MailboxAddress _actual = SendGridExtensions.ConvertToMailboxAddress(_ebAddress);
             Console.WriteLine(_userName + " " + _address);
             Console.WriteLine(_actual.ToString());
-            Assert.AreEqual(_userName, _actual.Name);
-            Assert.AreEqual(_address, _actual.Address);
+            Assert.That(_actual.Name, Is.EqualTo(_userName));
+            Assert.That(_actual.Address, Is.EqualTo(_address));
         }
         //
         // {
@@ -61,7 +54,7 @@ namespace NSG.MimeKit_Tests
         //  subject:"Denial-of-service attack from 63.251.98.12",
         //  plainTextConten:""
         // }
-        [TestMethod]
+        [Test]
         public void SendGrid_NewMailMessage_Deserialize_Test()
         {
             EmailAddress _from = new EmailAddress("PhilH@yahoo.com", "Phil Huhn");
@@ -71,13 +64,13 @@ namespace NSG.MimeKit_Tests
             SendGridMessage _sgm = MailHelper.CreateSingleEmail(_from, _to, _subject, _plainTextContent, null);
             MimeMessage _mimeMessage = SendGridExtensions.NewMimeMessage(_sgm);
             Console.WriteLine(_mimeMessage.From[0].ToString());
-            Assert.AreEqual("\"Phil Huhn\" <PhilH@yahoo.com>", _mimeMessage.From[0].ToString());
-            Assert.AreEqual("\"Abuse Admin\" <abuse@internap.com>", _mimeMessage.To[0].ToString());
-            Assert.AreEqual("Denial-of-service attack from 63.251.98.12", _mimeMessage.Subject);
-            Assert.AreEqual("Hi", _mimeMessage.TextBody);
+            Assert.That(_mimeMessage.From[0].ToString(), Is.EqualTo("\"Phil Huhn\" <PhilH@yahoo.com>"));
+            Assert.That(_mimeMessage.To[0].ToString(), Is.EqualTo("\"Abuse Admin\" <abuse@internap.com>"));
+            Assert.That(_mimeMessage.Subject, Is.EqualTo("Denial-of-service attack from 63.251.98.12"));
+            Assert.That(_mimeMessage.TextBody, Is.EqualTo("Hi"));
         }
         //
-        [TestMethod]
+        [Test]
         public void SendGrid_NewMailMessage_Test()
         {
             //
@@ -95,19 +88,19 @@ namespace NSG.MimeKit_Tests
                   "AbuseReport");
             MimeMessage _mimeMessage = SendGridExtensions.NewMimeMessage(_sgMessage);
             //
-            Assert.AreEqual("Hi", _mimeMessage.TextBody);
+            Assert.That(_mimeMessage.TextBody, Is.EqualTo("Hi"));
             int _count = 0;
             foreach(MimeEntity _item in _mimeMessage.Attachments)
             {
                 _count++;
                 Console.WriteLine(_item.ToString());
-                Assert.AreEqual("Content-Type: text/plain; name=\"AbuseReport.txt\"", _item.ContentType.ToString());
+                Assert.That(_item.ContentType.ToString(), Is.EqualTo("Content-Type: text/plain; name=\"AbuseReport.txt\""));
             }
-            Assert.AreEqual(1, _count);
+            Assert.That(_count, Is.EqualTo(1));
             //
         }
         //
-        [TestMethod]
+        [Test]
         public void SendGrid_NewMailMessage_Json_Test()
         {
             //
@@ -117,10 +110,10 @@ namespace NSG.MimeKit_Tests
             // (_from, _to, _subject, _plainTextContent, null);
             MimeMessage _mimeMessage = SendGridExtensions.NewMimeMessage(_sgMessage);
             //
-            Assert.AreEqual("abuse@amazonaws.com", _mimeMessage.To.Mailboxes.FirstOrDefault().Address);
-            Assert.AreEqual("PhilHuhn@yahoo.com", _mimeMessage.From.Mailboxes.FirstOrDefault().Address);
-            Assert.AreEqual("ViewState probe from 54.183.209.144", _mimeMessage.Subject);
-            Assert.AreEqual("Hi Stop the intrusion from your IP address 54.183.209.144.", _mimeMessage.TextBody);
+            Assert.That(_mimeMessage.To.Mailboxes.FirstOrDefault().Address, Is.EqualTo("abuse@amazonaws.com"));
+            Assert.That(_mimeMessage.From.Mailboxes.FirstOrDefault().Address, Is.EqualTo("PhilHuhn@yahoo.com"));
+            Assert.That(_mimeMessage.Subject, Is.EqualTo("ViewState probe from 54.183.209.144"));
+            Assert.That(_mimeMessage.TextBody, Is.EqualTo("Hi Stop the intrusion from your IP address 54.183.209.144.") );
             //
         }
         //

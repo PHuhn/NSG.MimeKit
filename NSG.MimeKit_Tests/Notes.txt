@@ -11,3 +11,21 @@ Install-Package Sendgrid -Version 9.12.0
 in the tests:
 	Install-Package Microsoft.Extensions.Configuration.Json
 	Install-Package Microsoft.Extensions.Options.ConfigurationExtensions
+
+R-click project and select 'Manage User Secrets'
+  secrets.json file:
+  {
+    "EmailSettings": {
+    "SmtpHost": "localhost",
+    "SmtpPort": 25,
+    "EnableSsl": false,
+    "IMapHost": "imap.gmail.com",
+    "IMapPort": 993,
+    "IMapEnableSsl": true,
+    "InBox": "INBOX",
+    "SentBox": "[Gmail]/Sent Mail",
+    "UserName": "Phil",
+    "UserEmail": "Phil@any.net",
+    "Password": ""
+  }
+}
