@@ -65,7 +65,7 @@ namespace MimeKit.NSG
         public string UserEmail { get; set; } = "";
         //
         /// <summary>
-        /// Connect to the SMTP host with this user name's password.
+        /// Connect to the email host with user password or app password.
         /// </summary>
         public string Password { get; set; } = "";
         //

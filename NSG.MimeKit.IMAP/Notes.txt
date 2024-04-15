@@ -1,0 +1,5 @@
+This is the same namespace as the NSG.MimeKit.Extension.  "MimeKit.NSG"
+
+This set of services should use secrets.json, so passwords are
+ not stored in the project and version control.
+

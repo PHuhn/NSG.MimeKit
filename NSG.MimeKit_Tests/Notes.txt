@@ -15,17 +15,17 @@ in the tests:
 R-click project and select 'Manage User Secrets'
   secrets.json file:
   {
-    "EmailSettings": {
-    "SmtpHost": "localhost",
-    "SmtpPort": 25,
-    "EnableSsl": false,
-    "IMapHost": "imap.gmail.com",
-    "IMapPort": 993,
-    "IMapEnableSsl": true,
-    "InBox": "INBOX",
-    "SentBox": "[Gmail]/Sent Mail",
-    "UserName": "Phil",
-    "UserEmail": "Phil@any.net",
-    "Password": ""
+    "NSG:EmailSettings": {
+      "SmtpHost": "smtp.gmail.com",
+      "SmtpPort": 465,
+      "EnableSsl": true,
+      "IMapHost": "imap.gmail.com",
+      "IMapPort": 993,
+      "IMapEnableSsl": true,
+      "InBox": "INBOX",
+      "SentBox": "[Gmail]/Sent Mail",
+      "UserName": "Phil H.",
+      "UserEmail": "Phil@gmail.com",
+      "Password": "iiii vvvv uuuu dddd"
+    }
   }
-}
