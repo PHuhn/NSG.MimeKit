@@ -4,9 +4,9 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <RootNamespace>MimeKit</RootNamespace>
     <AssemblyName>MimeKit.Extensions</AssemblyName>
-    <Version>1.0.4.21</Version>
-    <AssemblyVersion>1.0.4.21</AssemblyVersion>
-    <FileVersion>1.0.4.21</FileVersion>
+    <Version>1.0.4.22</Version>
+    <AssemblyVersion>1.0.4.22</AssemblyVersion>
+    <FileVersion>1.0.4.22</FileVersion>
     <Copyright>Copyright © 2024</Copyright>
     <Company>Northern Software Group</Company>
     <Authors>Phil Huhn (NSG)</Authors>

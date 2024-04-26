@@ -440,7 +440,7 @@ namespace NSG.MimeKit_Tests
                 .Build();
             //
             MimeKit.NSG.EmailSettings _emailSettings =
-                _config.GetSection("NSG:EmailSettings").Get<MimeKit.NSG.EmailSettings>();
+                _config.GetSection("EmailSettings:NSG").Get<MimeKit.NSG.EmailSettings>();
             string _toAddress = "ToUser1@somewhere.com";
             string _subject = "Subject 1";
             string _message = "Text message 1";

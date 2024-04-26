@@ -1,7 +1,9 @@
 ﻿//
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
+using System.Xml.Linq;
 //
 namespace MimeKit.NSG
 {
@@ -69,6 +71,26 @@ namespace MimeKit.NSG
         /// </summary>
         public string Password { get; set; } = "";
         //
+        /// <summary>
+        /// Create a 'to string'.
+        /// </summary>
+        public override string ToString()
+        {
+            //
+            StringBuilder _return = new StringBuilder("record:[");
+            _return.AppendFormat("SmtpHost: {0}, ", this.SmtpHost)
+                .AppendFormat("SmtpPort: {0}, ", SmtpPort)
+                .AppendFormat("EnableSsl: {0}\n", EnableSsl)
+                .AppendFormat("IMapHost: {0}, ", IMapHost)
+                .AppendFormat("IMapPort: {0}, ", IMapPort)
+                .AppendFormat("IMapEnableSsl: {0}\n", IMapEnableSsl)
+                .AppendFormat("InBox: {0}, ", SmtpHost)
+                .AppendFormat("SentBox: {0}\n", SentBox)
+                .AppendFormat("UserName: {0}, ", UserName)
+                .AppendFormat("UserEmail: {0}, ", UserEmail)
+                .AppendFormat("Password (last 4): {0}]", Password.Substring(Math.Max(0, Password.Length - 4)));
+            return _return.ToString();
+        }
     }
 }
 //

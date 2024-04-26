@@ -25,6 +25,7 @@ namespace NSG.MimeKit_Tests
         {
             // MimeKit.NSG.
             EmailSettings _emailSettings;
+            Dictionary<string, EmailSettings> _emailSettingsDict;
             Console.WriteLine("GetEmailSettings: Entering ...");
             string _appSettings = "appSettings.json";
             try
@@ -37,8 +38,15 @@ namespace NSG.MimeKit_Tests
                 //
                 if (_config != null)
                 {
-                    _emailSettings =
-                        _config.GetSection("NSG:EmailSettings").Get<EmailSettings>();
+                    _emailSettingsDict =
+                        _config.GetSection("EmailSettings").Get<Dictionary<string, EmailSettings>>();
+                    foreach (KeyValuePair<string, EmailSettings> entry in _emailSettingsDict)
+                    {
+                        Console.WriteLine(entry.Key);
+                        Console.WriteLine(entry.Value.ToString());
+                        Console.WriteLine("");
+                    }
+                    _emailSettings = _emailSettingsDict["NSG"];
                     Console.WriteLine($"EmailSettings: {_emailSettings}");
                 }
                 else
@@ -54,6 +62,14 @@ namespace NSG.MimeKit_Tests
                 throw;
             }
             return _emailSettings;
+        }
+        //
+        [Test]
+        public async Task MailKit_IMap_GetEmailSettings_Test()
+        {
+            // given
+            EmailSettings _emailSettings = GetEmailSettings();
+            //
         }
         //
         [Test]

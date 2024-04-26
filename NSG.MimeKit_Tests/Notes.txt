@@ -15,7 +15,7 @@ in the tests:
 R-click project and select 'Manage User Secrets'
   secrets.json file:
   {
-    "NSG:EmailSettings": {
+    "EmailSettings:NSG": {
       "SmtpHost": "smtp.gmail.com",
       "SmtpPort": 465,
       "EnableSsl": true,
