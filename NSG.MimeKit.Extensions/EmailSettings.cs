@@ -1,9 +1,8 @@
 ﻿//
 using System;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using System.Text;
-using System.Xml.Linq;
+//
+using MailKit.Security;
 //
 namespace MimeKit.NSG
 {
@@ -16,35 +15,75 @@ namespace MimeKit.NSG
         //
         /// <summary>
         /// Host name of the SMTP server or relay.
+        ///  <list type="table">
+        ///   <listheader><term>Examples</term></listheader>
+        ///   <item><term>smtp.gmail.com</term></item>
+        ///   <item><term>smtp.mail.yahoo.com</term></item>
+        ///  </list>
         /// </summary>
         public string SmtpHost { get; set; } = "";
         //
         /// <summary>
         /// An integer port number.
+        /// Simple Mail Transfer Protocol (SMTP) used port 25.
+        /// SMTP should use port 587 — this is the port for encrypted email 
+        /// transmissions using SMTP Secure (SMTPS).
+        /// Port 465 is also used sometimes for SMTPS. However, this is an
+        /// outdated implementation and port 587 should be used if possible.
+        ///  <list type="bullet">
+        ///   <listheader><term>Port</term><description>Description</description></listheader>
+        ///   <item><term>25</term><description>Unsecured</description></item>
+        ///   <item><term>465</term><description>Secured with SSL</description></item>
+        ///   <item><term>587</term><description>Secured TLS</description></item>
+        ///  </list>
         /// </summary>
         public int SmtpPort { get; set; } = 0;
         //
         /// <summary>
-        /// Boolean value for enabling SSL.
+        /// Enum value for SMTP SecureSocketOptions.
+        ///  <list type="bullet">
+        ///   <listheader><term>Enum</term><description>Value</description></listheader>
+        ///   <item><term>None</term><description>0</description></item>
+        ///   <item><term>Auto</term><description>1</description></item>
+        ///   <item><term>SslOnConnect</term><description>2</description></item>
+        ///   <item><term>StartTls</term><description>3</description></item>
+        ///   <item><term>StartTlsWhenAvailable</term><description>4</description></item>
+        ///  </list>
         /// </summary>
-        public bool EnableSsl { get; set; } = false;
+        public SecureSocketOptions SmtpSecureOption { get; set; } = SecureSocketOptions.None;
         //
         /// <summary>
         /// Host name of the IMAP server or relay.
-        /// Example: imap.gmail.com
+        ///  <list type="table">
+        ///   <listheader><term>Examples</term></listheader>
+        ///   <item><term>imap.gmail.com</term></item>
+        ///   <item><term>imap.mail.yahoo.com</term></item>
+        ///  </list>
         /// </summary>
         public string IMapHost { get; set; } = "";
         //
         /// <summary>
         /// An integer port number of the IMAP server.
-        /// Example: 993
+        ///  <list type="bullet">
+        ///   <listheader><term>Port</term><description>Description</description></listheader>
+        ///   <item><term>143</term><description>Unsecured</description></item>
+        ///   <item><term>993</term><description>Secured port over TLS/SSL</description></item>
+        ///  </list>
         /// </summary>
         public int IMapPort { get; set; } = 0;
         //
         /// <summary>
-        /// Boolean value for enabling SSL for IMAP protocol.
+        /// Enum value of SecureSocketOptions for IMAP protocol.
+        ///  <list type="bullet">
+        ///   <listheader><term>Enum</term><description>Value</description></listheader>
+        ///   <item><term>None</term><description>0</description></item>
+        ///   <item><term>Auto</term><description>1</description></item>
+        ///   <item><term>SslOnConnect</term><description>2</description></item>
+        ///   <item><term>StartTls</term><description>3</description></item>
+        ///   <item><term>StartTlsWhenAvailable</term><description>4</description></item>
+        ///  </list>
         /// </summary>
-        public bool IMapEnableSsl { get; set; } = false;
+        public SecureSocketOptions IMapSecureOption { get; set; } = SecureSocketOptions.None;
         //
         /// <summary>
         /// Email providers name for in-box mail folder
@@ -67,12 +106,13 @@ namespace MimeKit.NSG
         public string UserEmail { get; set; } = "";
         //
         /// <summary>
-        /// Connect to the email host with user password or app password.
+        /// Connect to the email host with app password or user password.
+        /// Most likely a 16 letter app password
         /// </summary>
         public string Password { get; set; } = "";
         //
         /// <summary>
-        /// Create a 'to string'.
+        /// Override the default 'to string' with the actual values of the instance.
         /// </summary>
         public override string ToString()
         {
@@ -80,10 +120,10 @@ namespace MimeKit.NSG
             StringBuilder _return = new StringBuilder("record:[");
             _return.AppendFormat("SmtpHost: {0}, ", this.SmtpHost)
                 .AppendFormat("SmtpPort: {0}, ", SmtpPort)
-                .AppendFormat("EnableSsl: {0}\n", EnableSsl)
+                .AppendFormat("SmtpSecureOption: {0}\n", SmtpSecureOption)
                 .AppendFormat("IMapHost: {0}, ", IMapHost)
                 .AppendFormat("IMapPort: {0}, ", IMapPort)
-                .AppendFormat("IMapEnableSsl: {0}\n", IMapEnableSsl)
+                .AppendFormat("IMapSecureOption: {0}\n", IMapSecureOption)
                 .AppendFormat("InBox: {0}, ", SmtpHost)
                 .AppendFormat("SentBox: {0}\n", SentBox)
                 .AppendFormat("UserName: {0}, ", UserName)

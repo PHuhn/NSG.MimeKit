@@ -2,8 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>1.0.4.18</Version>
-    <Copyright>Copyright ©  2022</Copyright>
+    <Version>1.0.4.23</Version>
+    <AssemblyVersion>1.0.4.23</AssemblyVersion>
+    <FileVersion>1.0.4.23</FileVersion>
+    <Copyright>Copyright © 2024</Copyright>
     <Company>Northern Software Group</Company>
     <Authors>Phil Huhn (NSG)</Authors>
     <Description>A fluent interface to MimeKit and SendGrid classes</Description>
@@ -13,13 +15,12 @@
     <PackageLicenseUrl>https://raw.githubusercontent.com/PHuhn/NSG.MimeKit/master/LICENSE</PackageLicenseUrl>
     <PackageTags>mimekit mailkit csharp extension fluent dotnet-standard</PackageTags>
     <RootNamespace>MimeKit</RootNamespace>
-    <AssemblyVersion>1.0.4.18</AssemblyVersion>
-    <FileVersion>1.0.4.18</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netstandard2.0\NSG.MimeKit.SendGrid.Extensions.xml</DocumentationFile>
-    <OutputPath></OutputPath>
+    <DocumentationFile>
+      bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml
+    </DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

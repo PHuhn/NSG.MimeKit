@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>1.0.4.21</Version>
-    <AssemblyVersion>1.0.4.21</AssemblyVersion>
-    <FileVersion>1.0.4.21</FileVersion>
+    <Version>1.0.4.23</Version>
+    <AssemblyVersion>1.0.4.23</AssemblyVersion>
+    <FileVersion>1.0.4.23</FileVersion>
     <Copyright>Copyright © 2024</Copyright>
     <Company>Northern Software Group</Company>
     <Authors>Phil Huhn (NSG)</Authors>
@@ -14,6 +14,13 @@
     <RepositoryType>.Net Standard 2.1 Library</RepositoryType>
     <PackageLicenseUrl>https://raw.githubusercontent.com/PHuhn/NSG.MimeKit/master/LICENSE</PackageLicenseUrl>
     <Nullable>enable</Nullable>
+    <UserSecretsId>21d71de3-3c02-4c1c-ab4e-e18dd9beabd3</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>
+      bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml
+	</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

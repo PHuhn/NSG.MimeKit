@@ -19,6 +19,81 @@ Task<MimeMessage> _email = (new MimeMessage())
     ).SendAsync(); // "localhost", 25, false, "", "");
 ```
 
+## NSG.MimeKit.EmailSettings
+
+EmailSettings is a class that maps the appSettings.json configuration.
+I've implemented the appSettings.json mapping as a Dictionary, so the
+application can have multiple configurations based on the company.  The
+appSettings.json can be implemented as a simple single class.  If you use
+gmail or yahoo or at&t mail server you will need to use an App Password instead of the email account's password.  Since the configuration contains passwords
+I've stored the values in secrets.json.
+
+Example from of secrets.json:
+```
+{
+  "EmailSettings": {
+    "Default": {
+      "SmtpHost": "smtp.gmail.com",
+      "SmtpPort": 587,
+      "SmtpSecureOption": "StartTls",
+      "IMapHost": "imap.gmail.com",
+      "IMapPort": 993,
+      "IMapSecureOption": "StartTlsWhenAvailable",
+      "InBox": "INBOX",
+      "SentBox": "[Gmail]/Sent Mail",
+      "UserName": "Administrator",
+      "UserEmail": "nsg@gmail.com",
+      "Password": "iiii vvvv uuuu dbdb"
+    },
+    "NSG": {
+      "SmtpHost": "smtp.gmail.com",
+      "SmtpPort": 587,
+      "SmtpSecureOption": "StartTls",
+      "IMapHost": "imap.gmail.com",
+      "IMapPort": 993,
+      "IMapSecureOption": "StartTlsWhenAvailable",
+      "InBox": "INBOX",
+      "SentBox": "[Gmail]/Sent Mail",
+      "UserName": "Phil (Gmail)",
+      "UserEmail": "nsg@gmail.com",
+      "Password": "iiii vvvv uuuu dbdb"
+    },
+    "Cmp1": {
+      "SmtpHost": "smtp.mail.yahoo.com",
+      "SmtpPort": 587,
+      "SmtpSecureOption": "StartTls",
+      "IMapHost": "imap.mail.yahoo.com",
+      "IMapPort": 993,
+      "IMapSecureOption": "StartTlsWhenAvailable",
+      "InBox": "Inbox",
+      "SentBox": "Sent",
+      "UserName": "Bill (Yahoo)",
+      "UserEmail": "Company1@yahoo.com",
+      "Password": "ououwwwwkkkjjjj"
+    }
+  }
+}
+```
+
+In the tests project, I've also hidden email accounts in the secrets.json
+as follows:
+
+```
+{
+  "EmailSettings": {
+    ...
+  },
+  "gmail": {
+    "UserName": "Phil (gmail)",
+    "UserEmail": "Phil@gmail.com"
+  },
+  "yahoo": {
+    "UserName": "Phil (Yahoo)",
+    "UserEmail": "Phil@yahoo.com"
+  }
+}
+```
+
 ## NSG.MimeKit.SendGrid.Extensions ##
 
 Translation of SendGridMessage to MimeMessage.
@@ -43,7 +118,7 @@ You can use your own SMTP solution to the problem of testing.
 
 ## Docs
 
-Currently having problems getting Sandcastle Help Builder to work with .Net Standard 2.0.
+Currently having problems getting Sandcastle Help Builder to work with .Net Standard 2.1.
 
 ## Wiki
 

@@ -1,15 +1,17 @@
-﻿using System;
+﻿// ===========================================================================
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using MailKit;
-
 //
 using Microsoft.Extensions.Configuration;
 //
+using MailKit;
+using MailKit.Net.Imap;
 using MimeKit;
 using MimeKit.NSG;
 using NUnit.Framework;
+using Org.BouncyCastle.Utilities.Encoders;
 //
 namespace NSG.MimeKit_Tests
 {
@@ -21,54 +23,12 @@ namespace NSG.MimeKit_Tests
         {
         }
         //
-        public EmailSettings GetEmailSettings()
-        {
-            // MimeKit.NSG.
-            EmailSettings _emailSettings;
-            Dictionary<string, EmailSettings> _emailSettingsDict;
-            Console.WriteLine("GetEmailSettings: Entering ...");
-            string _appSettings = "appSettings.json";
-            try
-            {
-                IConfiguration _config = new ConfigurationBuilder()
-                    .AddJsonFile(_appSettings, optional: true, reloadOnChange: false)
-                    .AddUserSecrets<MimeKit_IMap_Tests>()
-                    .Build();
-                Console.WriteLine($"GetEmailSettings: After config: {_config}");
-                //
-                if (_config != null)
-                {
-                    _emailSettingsDict =
-                        _config.GetSection("EmailSettings").Get<Dictionary<string, EmailSettings>>();
-                    foreach (KeyValuePair<string, EmailSettings> entry in _emailSettingsDict)
-                    {
-                        Console.WriteLine(entry.Key);
-                        Console.WriteLine(entry.Value.ToString());
-                        Console.WriteLine("");
-                    }
-                    _emailSettings = _emailSettingsDict["NSG"];
-                    Console.WriteLine($"EmailSettings: {_emailSettings}");
-                }
-                else
-                {
-                    var _msg = "GetEmailSettings: ConfigurationBuilder, Could not find EmailSettings in secrets.json";
-                    Console.WriteLine(_msg);
-                    throw new Exception(_msg);
-                }
-            }
-            catch (Exception _ex)
-            {
-                Console.WriteLine(_ex.Message);
-                throw;
-            }
-            return _emailSettings;
-        }
-        //
         [Test]
         public async Task MailKit_IMap_GetEmailSettings_Test()
         {
             // given
-            EmailSettings _emailSettings = GetEmailSettings();
+            EmailSettings _emailSettings = EmailSettings_Config_Tests.GetEmailSettings("NSG");
+            Assert.That(_emailSettings, Is.Not.Null);
             //
         }
         //
@@ -76,7 +36,8 @@ namespace NSG.MimeKit_Tests
         public async Task MailKit_IMap_Get_Folders_Test()
         {
             // given
-            EmailSettings _emailSettings = GetEmailSettings();
+            EmailSettings _emailSettings = EmailSettings_Config_Tests.GetEmailSettings("NSG");
+            Console.WriteLine(_emailSettings);
             NSG_IMap _example = new NSG_IMap(_emailSettings);
             // when
             List<string> _folders = await _example.RetrieveFolders();
@@ -94,7 +55,7 @@ namespace NSG.MimeKit_Tests
         public async Task MailKit_IMap_Get_Mail_From_Folder_Test()
         {
             // given
-            EmailSettings _emailSettings = GetEmailSettings();
+            EmailSettings _emailSettings = EmailSettings_Config_Tests.GetEmailSettings("NSG");
             string _folderName = _emailSettings.SentBox;
             NSG_IMap _example = new NSG_IMap(_emailSettings);
             // when
@@ -114,7 +75,7 @@ namespace NSG.MimeKit_Tests
         public async Task MailKit_IMap_Get_Mail_From_Folder_AfterDate_Test()
         {
             // given
-            EmailSettings _emailSettings = GetEmailSettings();
+            EmailSettings _emailSettings = EmailSettings_Config_Tests.GetEmailSettings("NSG");
             string _folderName = _emailSettings.InBox;
             NSG_IMap _example = new NSG_IMap(_emailSettings);
             // when
@@ -133,7 +94,7 @@ namespace NSG.MimeKit_Tests
         public async Task MailKit_IMap_Get_Mail_Message_By_Id_Test()
         {
             // given
-            EmailSettings _emailSettings = GetEmailSettings();
+            EmailSettings _emailSettings = EmailSettings_Config_Tests.GetEmailSettings("NSG");
             string _folderName = _emailSettings.InBox;
             string _messageId = "422443090.136304.1712927763040@mail.yahoo.com";
             NSG_IMap _example = new NSG_IMap(_emailSettings);
@@ -149,7 +110,7 @@ namespace NSG.MimeKit_Tests
         public async Task MailKit_IMap_Get_EmailData_By_Uid_Test()
         {
             // given
-            EmailSettings _emailSettings = GetEmailSettings();
+            EmailSettings _emailSettings = EmailSettings_Config_Tests.GetEmailSettings("NSG");
             string _folderName = _emailSettings.InBox;
             UniqueId _uid = new UniqueId(837);
             NSG_IMap _example = new NSG_IMap(_emailSettings);
@@ -163,4 +124,4 @@ namespace NSG.MimeKit_Tests
         //
     }
 }
-//
+// ===========================================================================

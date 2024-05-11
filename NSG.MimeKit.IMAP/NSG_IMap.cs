@@ -10,7 +10,6 @@ using MimeKit;
 using MailKit.Net.Imap;
 using MailKit.Security;
 using MailKit.Search;
-using System.Runtime.ConstrainedExecution;
 //
 namespace MimeKit.NSG
 {
@@ -70,10 +69,10 @@ namespace MimeKit.NSG
     /// Set of IMAP retrieval methods:
     /// <list type="bullet">
     /// <item>bool imap_Authenticate(ImapClient client)</item>
-    /// <item>Task<List<string>> RetrieveFolders()</item>
-    /// <item>Task<List<EmailData>> RetrieveMessagesAfter(string mailBoxFolder, DateTime afterDate)</item>
-    /// <item>Task<MimeMessage> GetMessage(string mailBoxFolder, string messageId)</item>
-    /// <item>Task<EmailData> GetEmailData(string mailBoxFolder, UniqueId uniqueId)</item>
+    /// <item> Task&lt;List&lt;string&gt;&gt; RetrieveFolders() </item>
+    /// <item> Task&lt;List&lt;EmailData&gt;&gt; RetrieveMessagesAfter(string mailBoxFolder, DateTime afterDate) </item>
+    /// <item> Task&lt;MimeMessage&gt; GetMessage(string mailBoxFolder, string messageId) </item>
+    /// <item> Task&lt;EmailData&gt; GetEmailData(string mailBoxFolder, UniqueId uniqueId) </item>
     /// </list>
     /// </summary>
     public class NSG_IMap
@@ -93,7 +92,7 @@ namespace MimeKit.NSG
         /// Connect/authenticate to a IMAP server.
         /// </summary>
         /// <param name="client"></param>
-        /// <returns></returns>
+        /// <returns>True if success, false if failed</returns>
         /// <exception cref="Exception"></exception>
         protected bool imap_Authenticate(ImapClient client)
         {
@@ -101,14 +100,10 @@ namespace MimeKit.NSG
             //
             if (_emailSettings != null)
             {
-                SecureSocketOptions _ssl = SecureSocketOptions.None;
-                if (_emailSettings.IMapEnableSsl == true)
-                {
-                    _ssl = SecureSocketOptions.Auto;
-                }
+                bool _secureOption = _emailSettings.IMapSecureOption == SecureSocketOptions.None ? false : true;
                 try
                 {
-                    client.Connect(_emailSettings.IMapHost, _emailSettings.IMapPort, _ssl);
+                    client.Connect(_emailSettings.IMapHost, _emailSettings.IMapPort, _emailSettings.IMapSecureOption);
                     client.Authenticate(_emailSettings.UserEmail, _emailSettings.Password);
                     return true;
                 }
@@ -131,6 +126,7 @@ namespace MimeKit.NSG
         /// Get all server's folders.
         /// Code based upon the follwing:
         /// https://www.youtube.com/watch?v=qsKJUDyj0uE
+        /// Google:
         ///   INBOX
         ///   Personal
         ///   Receipts
@@ -145,6 +141,13 @@ namespace MimeKit.NSG
         ///   [Gmail]/Starred
         ///   [Gmail]/Trash
         ///   philhuhn@yahoo.com
+        /// Yahoo:   
+        ///   Archive
+        ///   Bulk
+        ///   Draft
+        ///   Inbox
+        ///   Sent
+        ///   Trash
         /// </summary>
         /// <returns>List of strings</returns>
         async public Task<List<string>> RetrieveFolders()
@@ -179,7 +182,7 @@ namespace MimeKit.NSG
         /// Get all email messages for the specific mailbox folder.
         /// </summary>
         /// <param name="mailBoxFolder"></param>
-        /// <returns></returns>
+        /// <returns>List of EmailData</returns>
         async public Task<List<EmailData>> RetrieveMessages(string mailBoxFolder)
         {
             List<EmailData> _list = new List<EmailData>();
@@ -226,7 +229,7 @@ namespace MimeKit.NSG
         /// </summary>
         /// <param name="mailBoxFolder"></param>
         /// <param name="afterDate"></param>
-        /// <returns></returns>
+        /// <returns>List of EmailData</returns>
         async public Task<List<EmailData>> RetrieveMessagesAfter(string mailBoxFolder, DateTime afterDate)
         {
             List<EmailData> _list = new List<EmailData>();
@@ -262,7 +265,7 @@ namespace MimeKit.NSG
         /// </summary>
         /// <param name="mailBoxFolder"></param>
         /// <param name="messageId"></param>
-        /// <returns></returns>
+        /// <returns>MimeMessage</returns>
         public async Task<MimeMessage> GetMessage(string mailBoxFolder, string messageId)
         {
             MimeMessage _message;
@@ -292,7 +295,7 @@ namespace MimeKit.NSG
         /// </summary>
         /// <param name="mailBoxFolder"></param>
         /// <param name="uniqueId"></param>
-        /// <returns></returns>
+        /// <returns>EmailData</returns>
         public async Task<EmailData> GetEmailData(string mailBoxFolder, UniqueId uniqueId)
         {
             EmailData _message;

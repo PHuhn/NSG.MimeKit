@@ -17,11 +17,11 @@ R-click project and select 'Manage User Secrets'
   {
     "EmailSettings:NSG": {
       "SmtpHost": "smtp.gmail.com",
-      "SmtpPort": 465,
-      "EnableSsl": true,
+      "SmtpPort": 587,
+      "SmtpSecureOption": "StartTls",
       "IMapHost": "imap.gmail.com",
       "IMapPort": 993,
-      "IMapEnableSsl": true,
+      "IMapSecureOption": "StartTlsWhenAvailable",
       "InBox": "INBOX",
       "SentBox": "[Gmail]/Sent Mail",
       "UserName": "Phil H.",
@@ -29,3 +29,16 @@ R-click project and select 'Manage User Secrets'
       "Password": "iiii vvvv uuuu dddd"
     }
   }
+  
+========
+PROBLEM:
+    Unable to send emails with Extensions library.
+SOLUTION:
+    In the Connect used the UserName not UserEmail.
+
+========
+PROBLEM:
+    .
+SOLUTION:
+    .
+

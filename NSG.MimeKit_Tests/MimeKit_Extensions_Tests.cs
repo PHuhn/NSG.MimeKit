@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using MailKit.Security;
+
 //
 using Microsoft.Extensions.Configuration;
 //
 using MimeKit;
+using MailKit.Net.Smtp;
+using MimeKit.NSG;
 using NUnit.Framework;
+using SendGrid.Helpers.Mail;
 //
 namespace NSG.MimeKit_Tests
 {
@@ -430,17 +435,9 @@ namespace NSG.MimeKit_Tests
         public async Task MimeKit_Extensions_Config_SendAsync02_Test()
         {
             //
-            string appSettings = "appsettings.json";
-            if (appSettings != "")
-                if (!File.Exists(appSettings))
-                    throw new FileNotFoundException($"Settings file: {appSettings} not found.");
-            IConfiguration _config = new ConfigurationBuilder()
-                .AddJsonFile(appSettings, optional: true, reloadOnChange: false)
-                .AddUserSecrets<MimeKit_Extensions_Tests>()
-                .Build();
+            string _settingsName = "NSG";
+            EmailSettings _emailSettings = EmailSettings_Config_Tests.GetEmailSettings(_settingsName);
             //
-            MimeKit.NSG.EmailSettings _emailSettings =
-                _config.GetSection("EmailSettings:NSG").Get<MimeKit.NSG.EmailSettings>();
             string _toAddress = "ToUser1@somewhere.com";
             string _subject = "Subject 1";
             string _message = "Text message 1";
@@ -448,6 +445,31 @@ namespace NSG.MimeKit_Tests
                 .From(_emailSettings.UserEmail, _emailSettings.UserName).To(_toAddress)
                 .Subject(_subject).Body(Extensions.TextBody(_message))
                 .SendAsync(_emailSettings);
+            string _actual = _email.TextBody;
+            string _expected = _message;
+            Console.WriteLine(_expected + " " + _actual);
+            Assert.That(_actual, Is.EqualTo(_expected));
+            //
+        }
+        //
+        [Test]
+        public async Task MimeKit_Extensions_Config_Real_SendAsync02_Test()
+        {
+            //
+            string _settingsName = "NSG";
+            EmailTo _emailTo = EmailSettings_Config_Tests.GetEmailTo("yahoo");
+            EmailSettings _emailSettings = EmailSettings_Config_Tests.GetEmailSettings(_settingsName);
+            //
+            string _toName = _emailTo.UserName;
+            string _toAddress = _emailTo.UserEmail;
+            string _subject = "Test email from Net-Incident";
+            string _message = $"Test text message using config {_settingsName}";
+            Console.WriteLine($"Settings: {_emailSettings}");
+            MimeMessage _email = await Extensions.NewMimeMessage()
+                .From(_emailSettings.UserEmail, _emailSettings.UserName).To(_toAddress, _toName)
+                .Subject(_subject).Body(Extensions.TextBody(_message))
+                .SendAsync(_emailSettings);
+            Console.WriteLine($"Message: {_email}");
             string _actual = _email.TextBody;
             string _expected = _message;
             Console.WriteLine(_expected + " " + _actual);
@@ -502,6 +524,22 @@ namespace NSG.MimeKit_Tests
             //
         }
         //
+        public void SendEmail(EmailSettings settings, string userName, string userEmail, string subject, string messageBody)
+        {
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress(settings.UserEmail, settings.UserEmail));
+            message.To.Add(new MailboxAddress(userName, userEmail));
+            message.Subject = subject;
+            message.Body = new TextPart("plain") { Text = messageBody };
+            Console.WriteLine($"Settings: {settings}");
+            using (var client = new SmtpClient())
+            {
+                client.Connect(settings.SmtpHost, settings.SmtpPort, settings.SmtpSecureOption);
+                client.Authenticate(settings.UserEmail, settings.Password);
+                client.Send(message);
+                client.Disconnect(true);
+            }
+        }
     }
 }
 //

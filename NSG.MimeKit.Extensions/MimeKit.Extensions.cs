@@ -3,6 +3,8 @@ using MimeKit;
 using MailKit.Net.Smtp;
 using System.Threading.Tasks;
 using System.Linq;
+using MailKit.Security;
+using MimeKit.NSG;
 //
 namespace MimeKit
 {
@@ -386,10 +388,10 @@ namespace MimeKit
         //
         #endregion // BodyBuilder class
         //
-        //  MimeMessage Send(this mimeMessage, smtpHost, port, ssl, userName, passWord)
+        //  MimeMessage Send(this mimeMessage, smtpHost, port, ssl, userEmail, passWord)
         //  MimeMessage Send(this mimeMessage, smtpHost, port, ssl)
         //  MimeMessage Send(this mimeMessage)
-        //  MimeMessage SendAsync(this mimeMessage, smtpHost, port, ssl, userName, passWord)
+        //  MimeMessage SendAsync(this mimeMessage, smtpHost, port, ssl, userEmail, passWord)
         //  MimeMessage SendAsync(this mimeMessage, smtpHost, port, ssl)
         //  MimeMessage SendAsync(this mimeMessage)
         //
@@ -402,10 +404,10 @@ namespace MimeKit
         /// <param name="smtpHost">Host name of the SMTP server or relay.</param>
         /// <param name="port">An integer port number.</param>
         /// <param name="ssl">Boolean value for enabling SSL.</param>
-        /// <param name="userName">Connect to the SMTP host with this userName.</param>
+        /// <param name="userEmail">Connect to the SMTP host with this userEmail.</param>
         /// <param name="passWord">Connect to the SMTP host with this user name's password.</param>
         /// <returns>this, MimeMessage to allow fluent design.</returns>
-        public static MimeMessage Send(this MimeMessage mimeMessage, string smtpHost, int port, bool ssl, string userName, string passWord)
+        public static MimeMessage Send(this MimeMessage mimeMessage, string smtpHost, int port, bool ssl, string userEmail, string passWord)
         {
             using (SmtpClient _client = new SmtpClient())
             {
@@ -414,8 +416,8 @@ namespace MimeKit
                 _client.AuthenticationMechanisms.Remove("XOAUTH2");
                 //
                 _client.Connect(smtpHost, port, ssl);
-                if (userName != "" && passWord != "")
-                    _client.Authenticate(userName, passWord);
+                if (userEmail != "" && passWord != "")
+                    _client.Authenticate(userEmail, passWord);
                 //
                 _client.Send(mimeMessage);
                 _client.Disconnect(true);
@@ -473,21 +475,22 @@ namespace MimeKit
         /// <param name="mimeMessage">This MimeMessage.</param>
         /// <param name="smtpHost">Host name of the SMTP server or relay.</param>
         /// <param name="port">An integer port number.</param>
-        /// <param name="ssl">Boolean value for enabling SSL.</param>
-        /// <param name="userName">Connect to the SMTP host with this userName.</param>
+        /// <param name="secureOption">Value for enabling security option.</param>
+        /// <param name="userEmail">Connect to the SMTP host with this userName.</param>
         /// <param name="passWord">Connect to the SMTP host with this user name's password.</param>
         /// <returns>this, MimeMessage to allow fluent design.</returns>
-        public async static Task<MimeMessage> SendAsync(this MimeMessage mimeMessage, string smtpHost, int port, bool ssl, string userName, string passWord)
+        public async static Task<MimeMessage> SendAsync(this MimeMessage mimeMessage, string smtpHost, int port, SecureSocketOptions secureOption, string userEmail, string passWord)
         {
-            using (SmtpClient _client = new SmtpClient())
+            using ( var _client = new MailKit.Net.Smtp.SmtpClient() )
             {
                 _client.ServerCertificateValidationCallback =
                     (sender, certificate, certChainType, errors) => true;
                 _client.AuthenticationMechanisms.Remove("XOAUTH2");
                 //
-                await _client.ConnectAsync(smtpHost, port, ssl).ConfigureAwait(false);
-                if(userName != "" && passWord != "")
-                    await _client.AuthenticateAsync(userName, passWord).ConfigureAwait(false);
+                await _client.ConnectAsync(smtpHost, port, secureOption);/// <param name="secureOption"></param>
+
+                if(userEmail != "" && passWord != "")
+                    await _client.AuthenticateAsync(userEmail, passWord);
                 //
                 await _client.SendAsync(mimeMessage).ConfigureAwait(false);
                 await _client.DisconnectAsync(true).ConfigureAwait(false);
@@ -512,9 +515,9 @@ namespace MimeKit
         /// <param name="port">An integer port number.</param>
         /// <param name="ssl">Boolean value for enabling SSL.</param>
         /// <returns>this, MimeMessage to allow fluent design.</returns>
-        public async static Task<MimeMessage> SendAsync(this MimeMessage mimeMessage, string smtpHost, int port, bool ssl)
+        public async static Task<MimeMessage> SendAsync(this MimeMessage mimeMessage, string smtpHost, int port, SecureSocketOptions secureOption)
         {
-            return await mimeMessage.SendAsync(smtpHost, port, ssl, "", "");
+            return await mimeMessage.SendAsync(smtpHost, port, secureOption, "", "");
         }
         //
         /// <summary>
@@ -536,7 +539,7 @@ namespace MimeKit
         /// <returns>this, MimeMessage to allow fluent design.</returns>
         public async static Task<MimeMessage> SendAsync(this MimeMessage mimeMessage)
         {
-            return await mimeMessage.SendAsync("localhost", 25, false, "", "");
+            return await mimeMessage.SendAsync("localhost", 25, SecureSocketOptions.None, "", "");
         }
         //
         /// <summary>
@@ -551,7 +554,7 @@ namespace MimeKit
         /// <returns>this, MimeMessage to allow fluent design.</returns>
         public async static Task<MimeMessage> SendAsync(this MimeMessage mimeMessage, MimeKit.NSG.EmailSettings emailSettings)
         {
-            return await mimeMessage.SendAsync(emailSettings.SmtpHost, emailSettings.SmtpPort, emailSettings.EnableSsl, emailSettings.UserName, emailSettings.Password);
+            return await mimeMessage.SendAsync(emailSettings.SmtpHost, emailSettings.SmtpPort, emailSettings.SmtpSecureOption, emailSettings.UserEmail, emailSettings.Password);
         }
         //
         #endregion // Send
